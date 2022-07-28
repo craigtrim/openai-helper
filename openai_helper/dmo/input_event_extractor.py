@@ -86,7 +86,7 @@ class InputEventExtractor(BaseObject):
                 raise ValueError('Prompt Input Required')
 
             if self.isEnabledForDebug:
-                Enforcer.is_str('input_prompt')
+                Enforcer.is_str(input_prompt)
 
             return input_prompt
 
@@ -137,7 +137,7 @@ class InputEventExtractor(BaseObject):
             """
             if temperature:
                 if self.isEnabledForDebug:
-                    Enforcer.is_float('temperature')
+                    Enforcer.is_float(temperature)
                     assert temperature >= 0.0
                     assert temperature <= 1.0
                 return temperature
