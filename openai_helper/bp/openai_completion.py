@@ -6,10 +6,10 @@
 from baseblock import BaseObject
 
 from openai_helper.dmo import OpenAIConnector
-from openai_helper.svc import RunOpenAIEvent
+from openai_helper.svc import RunOpenAICompletion
 
 
-class OpenAIHelper(BaseObject):
+class OpenAICompletion(BaseObject):
     """ Run a Completion against openAI """
 
     def __init__(self):
@@ -21,7 +21,7 @@ class OpenAIHelper(BaseObject):
         """
         BaseObject.__init__(self, __name__)
         conn = OpenAIConnector().process()
-        self._run = RunOpenAIEvent(conn).process
+        self._run = RunOpenAICompletion(conn).process
 
     def run(self,
             input_prompt: str,

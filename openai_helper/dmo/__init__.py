@@ -1,2 +1,6 @@
 from .openai_connector import OpenAIConnector
-from .input_event_extractor import InputEventExtractor
+from .completion_event_extractor import CompletionEventExtractor
+from .etl_handle_textcompletions import EtlHandleTextCompletions
+from .etl_remove_indicators import EtlRemoveIndicators
+from .etl_replace_cliches import EtlReplaceCliches
+from .etl_replace_duplicatedinput import EtlReplaceDuplicatedInput

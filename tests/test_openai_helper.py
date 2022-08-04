@@ -1,16 +1,9 @@
-from openai_helper import __version__
-
-
-from openai_helper.bp import OpenAIHelper
-
-
-def test_version():
-    assert __version__ == '0.1.0'
+from openai_helper.bp import OpenAICompletion
 
 
 def test_bp():
 
-    bp = OpenAIHelper()
+    bp = OpenAICompletion()
     assert bp
 
 

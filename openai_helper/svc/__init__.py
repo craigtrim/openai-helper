@@ -1,1 +1,1 @@
-from .run_openai_event import RunOpenAIEvent
+from .run_openai_completion import RunOpenAICompletion

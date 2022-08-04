@@ -3,21 +3,13 @@
 """ Extract and Validate Input Parameters """
 
 
-from pprint import pformat
-
-
-import openai
-from functools import singledispatch
-
-
 from baseblock import EnvIO
 from baseblock import Enforcer
-from baseblock import CryptoBase
 from baseblock import BaseObject
 
 
-class InputEventExtractor(BaseObject):
-    """ Extract and Validate Input Parameters """
+class CompletionEventExtractor(BaseObject):
+    """ Extract and Validate Input Parameters for an OpenAI Completion """
 
     def __init__(self,
                  timeout: int = 5):

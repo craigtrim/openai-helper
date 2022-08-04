@@ -9,8 +9,6 @@ from openai_helper.bp import ExtractOutput
 
 def extract_output(input_text: str):
 
-    input_text = "Who are you?"
-
     d_result = {
         'output': {
             'choices': [

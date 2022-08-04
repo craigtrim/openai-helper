@@ -17,7 +17,7 @@ Use `CryptoBase.encrypt_str("...")` from https://pypi.org/project/baseblock/
 
 ###  Initialize the OpenAI Helper:
 ```python
-run = OpenAIHelper().run
+run = OpenAICompletion().run
 ```
 This will connect to OpenAI and establish performant callbacks.
 

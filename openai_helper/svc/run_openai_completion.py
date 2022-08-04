@@ -10,10 +10,10 @@ from baseblock import Enforcer
 from baseblock import Stopwatch
 from baseblock import BaseObject
 
-from openai_helper.dmo import InputEventExtractor
+from openai_helper.dmo import CompletionEventExtractor
 
 
-class RunOpenAIEvent(BaseObject):
+class RunOpenAICompletion(BaseObject):
     """ Run a Completion against openAI """
 
     def __init__(self,
@@ -31,6 +31,7 @@ class RunOpenAIEvent(BaseObject):
         """
         BaseObject.__init__(self, __name__)
         self._completion = conn.Completion.create
+        self._extract_event = CompletionEventExtractor().process
         self._timeout = EnvIO.int_or_default(
             'OPENAI_CREATE_TIMEOUT', timeout)  # GRAFFL-380
 
@@ -104,7 +105,7 @@ class RunOpenAIEvent(BaseObject):
 
         sw = Stopwatch()
 
-        d_params = InputEventExtractor().process(
+        d_params = self._extract_event(
             input_prompt=input_prompt,
             engine=engine,
             best_of=best_of,
