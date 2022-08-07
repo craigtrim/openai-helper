@@ -5,7 +5,7 @@ name = "openai-helper"
 version = "0.1.4"
 
 [tool.poetry.dependencies]
-baseblock = "0.1.4"
+baseblock = "0.1.5"
 openai = "^0.20.0"
 python = "3.8.5"
 
