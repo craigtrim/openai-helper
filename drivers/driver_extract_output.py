@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
+""" Integration Test """
 
 
 from baseblock import Enforcer
@@ -8,6 +9,11 @@ from openai_helper.bp import ExtractOutput
 
 
 def extract_output(input_text: str):
+
+    if type(input_text) == tuple:
+        input_text = input_text[0]
+
+    Enforcer.is_str(input_text)
 
     d_result = {
         'output': {
@@ -30,7 +36,12 @@ def extract_output(input_text: str):
 
 
 def main(input_text):
-    extract_output(input_text)
+    from drivers import IntegrationWrapper
+    wrapper = IntegrationWrapper()
+
+    wrapper.call(extract_output, input_text)
+
+    wrapper.deconstruct_env()
 
 
 if __name__ == "__main__":

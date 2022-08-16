@@ -3,6 +3,7 @@
 """ Run a Completion against openAI """
 
 
+from baseblock import Enforcer
 from baseblock import BaseObject
 
 from openai_helper.dmo import OpenAIConnector
@@ -63,11 +64,16 @@ class OpenAICompletion(BaseObject):
                 input: the input dictionary with validated parameters and default values where appropriate
                 output: the output event from OpenAI
         """
-        return self._run(input_prompt=input_prompt,
-                         engine=engine,
-                         best_of=best_of,
-                         temperature=temperature,
-                         max_tokens=max_tokens,
-                         top_p=top_p,
-                         frequency_penalty=frequency_penalty,
-                         presence_penalty=presence_penalty)
+        d_result = self._run(input_prompt=input_prompt,
+                             engine=engine,
+                             best_of=best_of,
+                             temperature=temperature,
+                             max_tokens=max_tokens,
+                             top_p=top_p,
+                             frequency_penalty=frequency_penalty,
+                             presence_penalty=presence_penalty)
+
+        if self.isEnabledForDebug:
+            Enforcer.keys(d_result, 'input', 'output')
+
+        return d_result

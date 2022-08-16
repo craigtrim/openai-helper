@@ -22,18 +22,17 @@ build:
 	make test
 	poetry build
 
-# smoke test - involves live API calls and assumptions around Keys and Authentication
-# that are not appropriate for platform-agnostic build tests
-smoke:
-	poetry run python tests/driver_extract_output.py "This is a test"
-	poetry run python tests/driver_openai_connector.py
-	poetry run python tests/driver_openai_helper.py
-	poetry run python tests/driver_openai_custom_model.py
-
 copy:
 	$(os_shell) $(copy_lib)
+
+integration:
+	poetry run python drivers/driver_openai_connector.py
+	poetry run python drivers/driver_extract_output.py "This is a test"
+	poetry run python drivers/driver_openai_custom_model.py
+	poetry run python drivers/driver_openai_helper.py
 
 all:
 	make build
 	make copy
+	make integraiton
 	poetry run python -m pip install --upgrade pip
