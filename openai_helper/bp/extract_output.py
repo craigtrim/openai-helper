@@ -19,17 +19,17 @@ class ExtractOutput(BaseObject):
         """
         Created:
             17-Mar-2022
-            craig@bast.ai
+            craigtrim@gmail.com
             *   in pursuit of
                 https://github.com/grafflr/graffl-core/issues/222
         Updated:
             18-Mar-2022
-            craig@bast.ai
+            craigtrim@gmail.com
             *   handle text completions
                 https://github.com/grafflr/graffl-core/issues/224
         Updated:
             4-Aug-2022
-            craig@bast.ai
+            craigtrim@gmail.com
             *   migrated to 'openai-helper' in pursuit of
                 https://bast-ai.atlassian.net/browse/COR-56
                 https://github.com/craigtrim/openai-helper/issues/1

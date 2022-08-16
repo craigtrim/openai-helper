@@ -16,7 +16,7 @@ class EtlReplaceDuplicatedInput(BaseObject):
 
         Created:
             4-Aug-2022
-            craig@bast.ai
+            craigtrim@gmail.com
             *   https://bast-ai.atlassian.net/browse/COR-56
         """
         BaseObject.__init__(self, __name__)

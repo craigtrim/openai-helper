@@ -25,15 +25,15 @@ class OpenAICustomModel(BaseObject):
 
         Created:
             20-Apr-2022
-            craig@bast.ai
+            craigtrim@gmail.com
             *   https://github.com/grafflr/graffl-core/issues/303
         Updated:
             12-May-2022
-            craig@bast.ai
+            craigtrim@gmail.com
             *   https://github.com/grafflr/graffl-core/issues/371
         Updated:
             4-Aug-2022
-            craig@bast.ai
+            craigtrim@gmail.com
             *   refactored in pursuit of
                 https://bast-ai.atlassian.net/browse/COR-57
 
