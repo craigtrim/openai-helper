@@ -48,7 +48,16 @@ class ExtractOutput(BaseObject):
 
             if len(choices):
                 output_text = choices[0]['text'].strip()
+
+                output_text = output_text.replace('\n', ' CUSTOMLINEBREAK ')
+                while '\n\n' in output_text:
+                    output_text = output_text.replace('\n\n', '\n')
+
                 output_text = output_text.split('\n')[-1].strip()
+
+                output_text = output_text.replace(' CUSTOMLINEBREAK ', '\n')
+                while '  ' in output_text:
+                    output_text = output_text.replace('  ', ' ')
 
                 return output_text
 

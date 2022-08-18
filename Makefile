@@ -34,5 +34,5 @@ integration:
 all:
 	make build
 	make copy
-	make integraiton
+	make integration
 	poetry run python -m pip install --upgrade pip
