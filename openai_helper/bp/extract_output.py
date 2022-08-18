@@ -67,9 +67,6 @@ class ExtractOutput(BaseObject):
             self._replace_cliched_text
         ]
 
-        from pprint import pprint
-        pprint(d_result)
-
         output_text = self._output_text(d_result)
         if not output_text or not len(output_text):
             return None

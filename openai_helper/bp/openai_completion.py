@@ -13,15 +13,21 @@ from openai_helper.svc import RunOpenAICompletion
 class OpenAICompletion(BaseObject):
     """ Run a Completion against openAI """
 
-    def __init__(self):
+    def __init__(self,
+                 conn: object = None):
         """ Change Log
 
         Created:
             28-Jul-2022
             craigtrim@gmail.com
+        Updated:
+            18-Aug-2022
+            craigtrim@gmail.com
+            *   allow optional conn as parameter
         """
         BaseObject.__init__(self, __name__)
-        conn = OpenAIConnector().process()
+        if not conn:
+            conn = OpenAIConnector().process()
         self._run = RunOpenAICompletion(conn).process
 
     def run(self,
