@@ -62,3 +62,4 @@ config.ps1
 *.xlsx
 publish_to_pypi.*
 *.tar.gz
+test-keys*
