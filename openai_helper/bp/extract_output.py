@@ -42,6 +42,7 @@ class ExtractOutput(BaseObject):
 
     @staticmethod
     def _output_text(d_result: dict) -> str:
+        
 
         if 'choices' in d_result['output']:
             choices = d_result['output']['choices']
@@ -49,6 +50,7 @@ class ExtractOutput(BaseObject):
             if len(choices):
                 output_text = choices[0]['text'].strip()
 
+                # TODO: if line breaks become an issue, then parameterize this feature
                 output_text = output_text.replace('\n', ' CUSTOMLINEBREAK ')
                 while '\n\n' in output_text:
                     output_text = output_text.replace('\n\n', '\n')

@@ -2,7 +2,7 @@
 authors = ["Craig Trim <craigtrim@gmail.com>"]
 description = "OpenAI Helper for Easy I/O"
 name = "openai-helper"
-version = "0.1.8"
+version = "0.1.9"
 
 [tool.poetry.dependencies]
 baseblock = "*"

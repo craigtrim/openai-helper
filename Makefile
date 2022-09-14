@@ -22,9 +22,6 @@ build:
 	make test
 	poetry build
 
-copy:
-	$(os_shell) $(copy_lib)
-
 integration:
 	poetry run python drivers/driver_openai_connector.py
 	poetry run python drivers/driver_extract_output.py "This is a test"

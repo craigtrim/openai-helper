@@ -56,6 +56,9 @@ class EtlRemoveIndicators(BaseObject):
         if 'Marv:' in output_text:
             output_text = output_text.replace('Marv:', '').strip()
 
+        if 'Len:' in output_text:
+            output_text = output_text.replace('Len:', '').strip()
+
         if "Marv's" in output_text:
             output_text = output_text.replace("Marv's", "its")
 
