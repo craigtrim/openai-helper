@@ -33,6 +33,10 @@ class ExtractOutput(BaseObject):
             *   migrated to 'openai-helper' in pursuit of
                 https://bast-ai.atlassian.net/browse/COR-56
                 https://github.com/craigtrim/openai-helper/issues/1
+        Updated:
+            14-Sept-2022
+            craigtrim@gmail.com
+            *   make text pipeline dynamic via incoming parameters
         """
         BaseObject.__init__(self, __name__)
         self._replace_duplicated_input = EtlReplaceDuplicatedInput().process
@@ -42,7 +46,6 @@ class ExtractOutput(BaseObject):
 
     @staticmethod
     def _output_text(d_result: dict) -> str:
-        
 
         if 'choices' in d_result['output']:
             choices = d_result['output']['choices']
@@ -67,22 +70,36 @@ class ExtractOutput(BaseObject):
 
     def process(self,
                 input_text: str,
-                d_result: dict) -> str or None:
+                d_result: dict,
+                replace_duplicated_input: bool = True,
+                handle_text_completions: bool = True,
+                remove_indicators: bool = True,
+                replace_cliched_text: bool = True) -> str or None:
 
         sw = Stopwatch()
 
-        text_pipeline = [
-            self._replace_duplicated_input,
-            self._handle_text_completions,
-            self._remove_indicators,
-            self._replace_cliched_text
-        ]
+        def create_pipeline() -> list:
+            text_pipeline = []
+
+            if replace_duplicated_input:
+                text_pipeline.append(self._replace_duplicated_input)
+
+            if handle_text_completions:
+                text_pipeline.append(self._handle_text_completions)
+
+            if remove_indicators:
+                text_pipeline.append(self._remove_indicators)
+
+            if replace_cliched_text:
+                text_pipeline.append(self._replace_cliched_text)
+
+            return text_pipeline
 
         output_text = self._output_text(d_result)
         if not output_text or not len(output_text):
             return None
 
-        for text_handler in text_pipeline:
+        for text_handler in create_pipeline():
             output_text = text_handler(input_text=input_text,
                                        output_text=output_text)
             if not output_text or not len(output_text):
