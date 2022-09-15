@@ -1,11 +1,5 @@
-ifeq ($(OS),Windows_NT)
-	os_shell := powershell
-	copy_lib := .\resources\scripts\copy.ps1
-else
-	os_shell := $(SHELL)
-	copy_lib := resources/scripts/copy.sh
-endif
-
+# -----------------------------------------------------------------
+# helper/openai-helper
 # -----------------------------------------------------------------
 
 install:
@@ -30,6 +24,5 @@ integration:
 
 all:
 	make build
-	make copy
 	make integration
 	poetry run python -m pip install --upgrade pip
