@@ -59,7 +59,7 @@ strict = false
 # optionally inherit from remote config (or local if you want)
 base = "https://raw.githubusercontent.com/flakeheaven/flakeheaven/main/pyproject.toml"
 # specify any flake8 options. For example, exclude "example.py":
-exclude = ["__init__.py", "*.md"]
+exclude = ["__init__.py", "*.md", "setup.py"]
 # make output nice
 format = "grouped"
 # 80 chars aren't enough in 21 century
