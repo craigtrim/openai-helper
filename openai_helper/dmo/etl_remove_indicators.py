@@ -23,7 +23,7 @@ class EtlRemoveIndicators(BaseObject):
                 input_text: str,
                 output_text: str) -> str:
         """ Eliminate Annoying Situations where OpenAI responds with something like
-            'Human: blah blah' 
+            'Human: blah blah'
         or
             'Assistant: blah blah'
 

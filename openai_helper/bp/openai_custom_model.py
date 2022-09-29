@@ -3,10 +3,7 @@
 """ Query a Custom Model in OpenAI """
 
 
-from random import sample
 from functools import lru_cache
-from re import search
-from openai.error import InvalidRequestError
 
 from baseblock import EnvIO
 from baseblock import Stopwatch
@@ -16,7 +13,6 @@ from baseblock import ServiceEventGenerator
 
 from openai_helper.svc import ExtractTopResponse
 from openai_helper.svc import CreateOpenAIAnswer
-from openai_helper.dmo import OpenAIConnector
 
 
 class OpenAICustomModel(BaseObject):
@@ -80,7 +76,7 @@ class OpenAICustomModel(BaseObject):
                 input_text: str,
                 search_model: str = 'text-davinci-002',
                 threshold: float = 25.0) -> tuple or None:
-        """ Call the OpenAI Text Summarizer
+        """ Call a custom OpenAI Model
 
         Args:
             input_text (str): the input text to send to OpenAI
@@ -120,7 +116,7 @@ class OpenAICustomModel(BaseObject):
 
         if self.isEnabledForInfo:
             self.logger.info('\n'.join([
-                f"OpenAI Service Completed",
+                "OpenAI Service Completed",
                 f"\tTotal Time: {str(sw)}",
                 f"\tInput Text: {input_text.strip()}",
                 f"\tOutput Text: {d_top_response['text']}"]))

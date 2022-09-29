@@ -90,7 +90,7 @@ class RunOpenAICompletion(BaseObject):
                 Use High Values cautiously
             max_tokens (int, optional): The Maximum Number of tokens to generate. Defaults to None.
                 Requests can use up to 4,000 tokens (this takes the length of the input prompt into account)
-                The higher this value, the more each request will cost.            
+                The higher this value, the more each request will cost.
             top_p (float, optional): Controls Diversity via Nucleus Sampling. Defaults to None.
                 no idea what this means
             frequency_penalty (int, optional): How much to penalize new tokens based on their frequency in the text so far. Defaults to None.

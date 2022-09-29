@@ -26,13 +26,13 @@ class EtlReplaceDuplicatedInput(BaseObject):
                 output_text: str) -> str:
         """ Sometimes the Input is Quoted in the Output Text
 
-        Sample Input: 
+        Sample Input:
             We are not put in this world for mere pleasure alone.
 
-        Sample Output: 
+        Sample Output:
             We are not put in this world for mere pleasure alone.  Sometimes, we must suffer through pain and hardship to grow and become stronger.
 
-        Desired Output: 
+        Desired Output:
             Sometimes, we must suffer through pain and hardship to grow and become stronger.
 
         Args:
