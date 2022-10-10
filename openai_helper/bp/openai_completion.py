@@ -3,15 +3,22 @@
 """ Run a Completion against openAI """
 
 
+from typing import Callable
+
+from baseblock import EnvIO
 from baseblock import Enforcer
 from baseblock import BaseObject
 
 from openai_helper.dmo import OpenAIConnector
 from openai_helper.svc import RunOpenAICompletion
+from openai_helper.dmo import NoOpenAIEvent
 
 
 class OpenAICompletion(BaseObject):
     """ Run a Completion against openAI """
+
+    __conn = None
+    __run = None
 
     def __init__(self,
                  conn: object = None):
@@ -24,11 +31,27 @@ class OpenAICompletion(BaseObject):
             18-Aug-2022
             craigtrim@gmail.com
             *   allow optional conn as parameter
+        Updated:
+            29-Sept-2022
+            craigtrim@gmail.com
+            *   integrate 'no-openai-event'
+
+        Args:
+            conn (object): a connection to openAI
         """
         BaseObject.__init__(self, __name__)
-        if not conn:
-            conn = OpenAIConnector().process()
-        self._run = RunOpenAICompletion(conn).process
+        if conn:
+            self.__conn = conn
+
+    def _conn(self) -> object:
+        if not self.__conn:
+            self.__conn = OpenAIConnector().process()
+        return self.__conn
+
+    def _run(self) -> Callable:
+        if not self.__run:
+            self.__run = RunOpenAICompletion(self._conn()).process
+        return self.__run
 
     def run(self,
             input_prompt: str,
@@ -70,6 +93,10 @@ class OpenAICompletion(BaseObject):
                 input: the input dictionary with validated parameters and default values where appropriate
                 output: the output event from OpenAI
         """
+
+        if not EnvIO.is_true("USE_OPENAI"):
+            return NoOpenAIEvent().process(input_prompt, engine)
+
         d_result = self._run(input_prompt=input_prompt,
                              engine=engine,
                              best_of=best_of,

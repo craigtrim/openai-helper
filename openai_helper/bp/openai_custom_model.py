@@ -13,6 +13,7 @@ from baseblock import ServiceEventGenerator
 
 from openai_helper.svc import ExtractTopResponse
 from openai_helper.svc import CreateOpenAIAnswer
+from openai_helper.dmo import NoOpenAIEvent
 
 
 class OpenAICustomModel(BaseObject):
@@ -50,27 +51,6 @@ class OpenAICustomModel(BaseObject):
         self._query = CreateOpenAIAnswer(model_name).process
         self._extract_top_response = ExtractTopResponse().process
 
-    def _no_openai(self,
-                   input_text: str,
-                   search_model: str) -> dict:
-
-        sw = Stopwatch()
-        output_events = []
-
-        output_events.append(self._generate_event(
-            service_name=self.component_name(),
-            event_name="openai",
-            stopwatch=sw,
-            data={
-                'input_text': input_text,
-                'search_model': search_model,
-                'output_text': "*** OPENAI DISABLED ***"}))
-
-        return {
-            'text': None,
-            'events': output_events
-        }
-
     @lru_cache
     def process(self,
                 input_text: str,
@@ -88,7 +68,7 @@ class OpenAICustomModel(BaseObject):
         """
 
         if not EnvIO.is_true("USE_OPENAI"):
-            return self._no_openai(input_text, search_model)
+            return NoOpenAIEvent().process(input_text, search_model)
 
         if self.isEnabledForDebug:
             Enforcer.is_str(input_text)

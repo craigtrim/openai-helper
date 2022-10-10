@@ -11,7 +11,7 @@ description = "OpenAI Helper for Easy I/O"
 license = "MIT"
 name = "openai-helper"
 readme = "README.md"
-version = "0.1.11"
+version = "0.1.13"
 
 keywords = ["openai", "api", "utility"]
 repository = "https://github.com/craigtrim/openai-helper"
@@ -33,6 +33,9 @@ flakeheaven = "*"
 mypy = "*"
 pre-commit = "^2.20.0"
 pytest = "*"
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/craigtrim/openai-helper/issues"
 
 [tool.poetry.build]
 generate-setup-file = true
@@ -59,7 +62,7 @@ strict = false
 # optionally inherit from remote config (or local if you want)
 base = "https://raw.githubusercontent.com/flakeheaven/flakeheaven/main/pyproject.toml"
 # specify any flake8 options. For example, exclude "example.py":
-exclude = ["__init__.py", "*.md", "setup.py"]
+exclude = ["__init__.py", "*.md", "setup.py", ".ipynb"]
 # make output nice
 format = "grouped"
 # 80 chars aren't enough in 21 century

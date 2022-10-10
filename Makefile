@@ -37,9 +37,13 @@ integration:
 	poetry run python drivers/driver_openai_custom_model.py
 	poetry run python drivers/driver_openai_helper.py
 
+freeze:
+	poetry run pip freeze > requirements.txt
+	poetry run python -m pip install --upgrade pip
+
 all:
 	make build
 	poetry run pre-commit run --all-files
 	poetry run flakeheaven lint
 	make copy
-	poetry run python -m pip install --upgrade pip
+	make freeze
