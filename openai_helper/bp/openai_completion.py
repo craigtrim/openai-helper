@@ -97,14 +97,14 @@ class OpenAICompletion(BaseObject):
         if not EnvIO.is_true("USE_OPENAI"):
             return NoOpenAIEvent().process(input_prompt, engine)
 
-        d_result = self._run(input_prompt=input_prompt,
-                             engine=engine,
-                             best_of=best_of,
-                             temperature=temperature,
-                             max_tokens=max_tokens,
-                             top_p=top_p,
-                             frequency_penalty=frequency_penalty,
-                             presence_penalty=presence_penalty)
+        d_result = self._run()(input_prompt=input_prompt,
+                               engine=engine,
+                               best_of=best_of,
+                               temperature=temperature,
+                               max_tokens=max_tokens,
+                               top_p=top_p,
+                               frequency_penalty=frequency_penalty,
+                               presence_penalty=presence_penalty)
 
         if self.isEnabledForDebug:
             Enforcer.keys(d_result, 'input', 'output')
