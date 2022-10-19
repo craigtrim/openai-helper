@@ -78,6 +78,12 @@ class ExtractOutput(BaseObject):
 
         sw = Stopwatch()
 
+        if not input_text:
+            return None
+
+        if not d_result:
+            return None
+
         def create_pipeline() -> list:
             text_pipeline = []
 

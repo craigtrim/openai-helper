@@ -24,6 +24,9 @@ def call(input_prompt: str,
         temperature=temperature,
         max_tokens=max_tokens)
 
+    if not d_result:
+        return None
+
     return ExtractOutput().process(
         input_text=input_prompt,
         d_result=d_result)
