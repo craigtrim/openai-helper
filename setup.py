@@ -2,13 +2,13 @@
 from setuptools import setup
 
 packages = \
-['openai_helper', 'openai_helper.bp', 'openai_helper.dmo', 'openai_helper.svc']
+    ['openai_helper', 'openai_helper.bp', 'openai_helper.dmo', 'openai_helper.svc']
 
 package_data = \
-{'': ['*']}
+    {'': ['*']}
 
 install_requires = \
-['baseblock', 'openai>=0.20.0,<0.21.0']
+    ['baseblock', 'openai>=0.20.0,<0.21.0']
 
 setup_kwargs = {
     'name': 'openai-helper',

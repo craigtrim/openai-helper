@@ -13,7 +13,7 @@ def call(input_prompt: str,
          max_tokens: int = 256,
          temperature: float = 0.7) -> Optional[str]:
 
-    if not EnvIO.exists_as_true['USE_OPENAI']:
+    if not EnvIO.exists_as_true('USE_OPENAI'):
         return None
 
     bp = OpenAICompletion()
