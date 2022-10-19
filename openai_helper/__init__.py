@@ -1,3 +1,6 @@
+from typing import Optional
+from baseblock import EnvIO
+
 from .bp import *
 from .svc import *
 from .dmo import *
@@ -8,7 +11,10 @@ from .bp.extract_output import ExtractOutput
 
 def call(input_prompt: str,
          max_tokens: int = 256,
-         temperature: float = 0.7) -> str:
+         temperature: float = 0.7) -> Optional[str]:
+
+    if not EnvIO.exists_as_true['USE_OPENAI']:
+        return None
 
     bp = OpenAICompletion()
 
