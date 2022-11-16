@@ -8,6 +8,9 @@ from baseblock.common_utils import odds_of
 from baseblock import BaseObject
 
 
+LINE_BREAK = '\n'
+
+
 class EtlRemoveListIndicators(BaseObject):
     """ Remove any Characters that Indicate List Delimitation
 
@@ -51,6 +54,20 @@ class EtlRemoveListIndicators(BaseObject):
         """
         BaseObject.__init__(self, __name__)
 
+    @staticmethod
+    def _strip_numbered_list(input_text: str) -> str:
+        for i in range(1, 16):
+
+            key = f"{i}."
+            if input_text.startswith(key):
+                return input_text[len(key):].strip()
+
+            key = f"{i})"
+            if input_text.startswith(key):
+                return input_text[len(key):].strip()
+
+        return input_text
+
     def process(self,
                 input_text: str,
                 output_text: str) -> str:
@@ -64,4 +81,24 @@ class EtlRemoveListIndicators(BaseObject):
             str: the output text
         """
 
-        return input_text
+        if LINE_BREAK not in output_text:
+            return output_text
+
+        normalized = []
+
+        lines = [x.strip() for x in output_text.split(LINE_BREAK)]
+        for line in lines:
+
+            if line.startswith('-'):
+                normalized.append(line[1:].strip())
+                continue
+
+            if '.' in line:
+                normalized.append(self._strip_numbered_list(line))
+                continue
+
+            normalized.append(line)
+
+        normalized = [x.strip() for x in normalized if x and len(x.strip())]
+
+        return LINE_BREAK.join(normalized)

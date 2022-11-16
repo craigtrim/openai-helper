@@ -3,8 +3,6 @@
 """ A Generic Service to Extract Unstructured Output from an OpenAI response """
 
 
-from os.path import sep as LINE_BREAK
-
 from typing import Optional
 
 from baseblock import Stopwatch
@@ -16,7 +14,7 @@ from openai_helper.dmo import EtlHandleTextCompletions
 from openai_helper.dmo import EtlReplaceDuplicatedInput
 from openai_helper.dmo import EtlRemovePromptIndicators
 
-
+LINE_BREAK = '\n'
 DOUBLE_LINE_BREAK = f"{LINE_BREAK}{LINE_BREAK}"
 CUSTOM_LINE_BREAK = ' CUSTOMLINEBREAK '
 
