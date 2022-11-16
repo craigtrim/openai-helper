@@ -13,5 +13,5 @@ def main():
     test_orchestrator()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

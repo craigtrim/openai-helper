@@ -69,7 +69,7 @@ class OpenAICustomModel(BaseObject):
             dict: the complete openAI event
         """
 
-        if not EnvIO.is_true("USE_OPENAI"):
+        if not EnvIO.is_true('USE_OPENAI'):
             return NoOpenAIEvent().process(input_text, search_model)
 
         if self.isEnabledForDebug:
@@ -98,9 +98,9 @@ class OpenAICustomModel(BaseObject):
 
         if self.isEnabledForInfo:
             self.logger.info('\n'.join([
-                "OpenAI Service Completed",
-                f"\tTotal Time: {str(sw)}",
-                f"\tInput Text: {input_text.strip()}",
+                'OpenAI Service Completed',
+                f'\tTotal Time: {str(sw)}',
+                f'\tInput Text: {input_text.strip()}',
                 f"\tOutput Text: {d_top_response['text']}"]))
 
         return {

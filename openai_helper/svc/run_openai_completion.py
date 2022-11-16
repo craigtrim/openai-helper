@@ -54,7 +54,7 @@ class RunOpenAICompletion(BaseObject):
         if self.isEnabledForDebug:
             Enforcer.is_dict(d_event)
             self.logger.debug('\n'.join([
-                "OpenAI Call Completed",
+                'OpenAI Call Completed',
                 pformat(d_result)]))
 
         return {
@@ -118,9 +118,9 @@ class RunOpenAICompletion(BaseObject):
         d_result = self._process(d_params)
 
         self.logger.debug('\n'.join([
-            "OpenAI Event Execution Completed",
-            f"\tTotal Time: {str(sw)}",
-            f"\tInput Params:\n{pformat(d_params)}",
-            f"\tOutput Result:\n{pformat(d_result)}"]))
+            'OpenAI Event Execution Completed',
+            f'\tTotal Time: {str(sw)}',
+            f'\tInput Params:\n{pformat(d_params)}',
+            f'\tOutput Result:\n{pformat(d_result)}']))
 
         return d_result

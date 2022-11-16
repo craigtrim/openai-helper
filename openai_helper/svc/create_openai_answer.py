@@ -41,26 +41,26 @@ class CreateOpenAIAnswer(BaseObject):
 
             return self._conn.Answer.create(
                 search_model=search_model,
-                model="curie",
+                model='curie',
                 question=input_text,
                 return_metadata=True,
                 file=self._model_name,
-                examples_context="In 2017, U.S. life expectancy was 78.6 years.",
+                examples_context='In 2017, U.S. life expectancy was 78.6 years.',
                 examples=[
-                    ["What is human life expectancy in the United States?", "78 years."]],
+                    ['What is human life expectancy in the United States?', '78 years.']],
                 max_rerank=10,
                 max_tokens=5,
-                stop=["\n", "<|endoftext|>"]
+                stop=['\n', '<|endoftext|>']
             )
 
         except InvalidRequestError:
             # GRAFFL-350; not necessarily a defect, just didn't find similar documents
             if self.isEnabledForInfo:
                 self.logger.info('\n'.join([
-                    "No Similar Documents Were Found",
-                    f"\tInput Text: {input_text}",
-                    f"\tTrained Model: {self._model_name}",
-                    f"\tSearch Model: {search_model}"]))
+                    'No Similar Documents Were Found',
+                    f'\tInput Text: {input_text}',
+                    f'\tTrained Model: {self._model_name}',
+                    f'\tSearch Model: {search_model}']))
 
             return None
 
@@ -78,7 +78,7 @@ class CreateOpenAIAnswer(BaseObject):
 
         output_events.append(self._generate_event(
             service_name=self.component_name(),
-            event_name="create-openai-answer",
+            event_name='create-openai-answer',
             stopwatch=sw,
             data={
                 'input_text': input_text,

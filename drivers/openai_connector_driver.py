@@ -24,5 +24,5 @@ def main():
     wrapper.deconstruct_env()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

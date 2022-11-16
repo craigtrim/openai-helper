@@ -10,12 +10,12 @@ from openai_helper.bp import OpenAICustomModel
 
 def test_custom_model():
 
-    johnkao_model_name = "file-N2QMp92F0kkETGSdknISails"
+    johnkao_model_name = 'file-N2QMp92F0kkETGSdknISails'
 
     bp = OpenAICustomModel(johnkao_model_name)
     assert bp
 
-    d_result = bp.process("How can I be successful in business?")
+    d_result = bp.process('How can I be successful in business?')
     Enforcer.keys(d_result, 'events', 'text')
 
 
@@ -28,5 +28,5 @@ def main():
     wrapper.deconstruct_env()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

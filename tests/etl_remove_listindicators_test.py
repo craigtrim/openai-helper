@@ -9,7 +9,7 @@ def test_component():
     dmo = EtlRemoveListIndicators()
     assert dmo
 
-    input_text = "List 10 things to do today"
+    input_text = 'List 10 things to do today'
 
     output_text = """
         1. wake up
@@ -51,5 +51,5 @@ def main():
     test_component()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

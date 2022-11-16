@@ -65,7 +65,7 @@ class EtlRemovePromptIndicators(BaseObject):
             output_text = output_text.replace('Len:', '').strip()
 
         if "Marv's" in output_text:
-            output_text = output_text.replace("Marv's", "its")
+            output_text = output_text.replace("Marv's", 'its')
 
         if 'Two-Sentence Horror Story:' in output_text:
             output_text = output_text.replace(

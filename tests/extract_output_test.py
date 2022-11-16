@@ -9,7 +9,7 @@ from openai_helper.bp import ExtractOutput
 
 def test_extract_output():
 
-    input_text = "Who are you?"
+    input_text = 'Who are you?'
 
     d_result = {
         'output': {
@@ -35,5 +35,5 @@ def main():
     test_extract_output()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

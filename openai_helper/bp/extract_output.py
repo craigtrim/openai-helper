@@ -15,7 +15,7 @@ from openai_helper.dmo import EtlReplaceDuplicatedInput
 from openai_helper.dmo import EtlRemovePromptIndicators
 
 LINE_BREAK = '\n'
-DOUBLE_LINE_BREAK = f"{LINE_BREAK}{LINE_BREAK}"
+DOUBLE_LINE_BREAK = f'{LINE_BREAK}{LINE_BREAK}'
 CUSTOM_LINE_BREAK = ' CUSTOMLINEBREAK '
 
 
@@ -144,9 +144,9 @@ class ExtractOutput(BaseObject):
 
         if self.isEnabledForDebug:
             self.logger.debug('\n'.join([
-                "OpenAI Output Extraction Completed",
-                f"\tTotal Time: {str(sw)}",
-                f"\tInput Text: {input_text}",
-                f"\tOutput Text: {output_text}"]))
+                'OpenAI Output Extraction Completed',
+                f'\tTotal Time: {str(sw)}',
+                f'\tInput Text: {input_text}',
+                f'\tOutput Text: {output_text}']))
 
         return output_text

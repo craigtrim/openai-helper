@@ -73,7 +73,7 @@ class ExtractTopResponse(BaseObject):
 
         output_events.append(self._generate_event(
             service_name=self.component_name(),
-            event_name="extract-top-response",
+            event_name='extract-top-response',
             stopwatch=sw,
             data={
                 'input_text': results,

@@ -35,15 +35,15 @@ class EtlReplaceCliches(BaseObject):
         long_texts = [
             "and that's where Loqi comes in.",
             "If you're looking for a chatbot that will give you sassy responses to your questions",
-            "look no further than Loqi",
+            'look no further than Loqi',
             "He may not be the most helpful chatbot out there, but he's definitely the funniest",
-            "Loqi is a chatbot that reluctantly answers questions in a mocking tone"
-            "is a chatbot that responds to questions with",
-            "is a chatbot that reluctantly answers questions",
+            'Loqi is a chatbot that reluctantly answers questions in a mocking tone'
+            'is a chatbot that responds to questions with',
+            'is a chatbot that reluctantly answers questions',
         ]
 
         for long_text in long_texts:
             if long_text in output_text:
-                output_text = output_text.replace(long_text, "")
+                output_text = output_text.replace(long_text, '')
 
         return output_text

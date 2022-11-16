@@ -94,7 +94,7 @@ class OpenAICompletion(BaseObject):
                 output: the output event from OpenAI
         """
 
-        if not EnvIO.is_true("USE_OPENAI"):
+        if not EnvIO.is_true('USE_OPENAI'):
             return NoOpenAIEvent().process(input_prompt, engine)
 
         d_result = self._run()(input_prompt=input_prompt,

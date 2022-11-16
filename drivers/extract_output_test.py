@@ -26,10 +26,10 @@ def main():
     from drivers import IntegrationWrapper
     wrapper = IntegrationWrapper()
 
-    wrapper.call(extract_output, "List 10 things to do today")
+    wrapper.call(extract_output, 'List 10 things to do today')
 
     wrapper.deconstruct_env()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

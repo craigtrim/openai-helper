@@ -7,7 +7,31 @@ repos:
       - id: trailing-whitespace
       - id: check-yaml
       - id: check-added-large-files
+      - id: end-of-file-fixer
+      - id: check-toml
+      - id: name-tests-test
+      - id: check-merge-conflict
+      - id: check-docstring-first
+      - id: check-json
+      - id: debug-statements
+      - id: double-quote-string-fixer
+      - id: requirements-txt-fixer
+
   - repo: https://github.com/pre-commit/mirrors-autopep8
-    rev: "" # Use the sha / tag you want to point at
+    rev: "v1.7.0" # Use the sha / tag you want to point at
     hooks:
       - id: autopep8
+
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.6.1
+    hooks:
+      - id: nbstripout
+
+  # 20221031;   keep this commented out
+  #             I feel like i do a better job at manual sorting
+  #             the automation feels rather random and messy
+  # - repo: https://github.com/asottile/reorder_python_imports
+  #   rev: v1.4.0
+  #   hooks:
+  #     - id: reorder-python-imports
+  #       args: [--py3-plus]

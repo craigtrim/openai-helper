@@ -44,6 +44,6 @@ def main(input_text):
     wrapper.deconstruct_env()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     import plac
     plac.call(main)

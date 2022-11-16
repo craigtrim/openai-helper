@@ -31,12 +31,12 @@ class NoOpenAIEvent(BaseObject):
 
         output_events.append(self._generate_event(
             service_name=self.component_name(),
-            event_name="openai",
+            event_name='openai',
             stopwatch=sw,
             data={
                 'input_text': input_text,
                 'search_model': search_model,
-                'output_text': "*** OPENAI DISABLED ***"}))
+                'output_text': '*** OPENAI DISABLED ***'}))
 
         return {
             'text': None,
