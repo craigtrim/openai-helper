@@ -3,6 +3,9 @@
 """ Connect to OpenAI """
 
 
+from typing import Any
+from typing import Optional
+
 import openai
 
 from baseblock import EnvIO
@@ -23,7 +26,7 @@ class OpenAIConnector(BaseObject):
         BaseObject.__init__(self, __name__)
 
     @classmethod
-    def _openai_key(cls) -> str:
+    def _openai_key(cls) -> Optional[str]:
         """ Retrieve OpenAI Key
 
         Use the encrypted key within the environment
@@ -37,7 +40,7 @@ class OpenAIConnector(BaseObject):
             return None
 
     @classmethod
-    def _openai_org(cls) -> str or None:
+    def _openai_org(cls) -> Optional[str]:
         """ Retrieve OpenAI org
 
         Use the encrypted key within the environment
@@ -50,7 +53,7 @@ class OpenAIConnector(BaseObject):
         except ValueError:
             return None
 
-    def _process(self) -> object:
+    def _process(self) -> Any:
         """ Connect to OpenAI
 
         Returns:
@@ -62,7 +65,7 @@ class OpenAIConnector(BaseObject):
 
         return openai
 
-    def process(self) -> object:
+    def process(self) -> Any:
         """ Connect to OpenAI
 
         Returns:

@@ -12,6 +12,16 @@ from .bp.extract_output import ExtractOutput
 def call(input_prompt: str,
          max_tokens: int = 256,
          temperature: float = 0.7) -> Optional[str]:
+    """ Call OpenAI
+
+    Args:
+        input_prompt (str): a defined input prompt
+        max_tokens (int, optional): max tokens to use. Defaults to 256.
+        temperature (float, optional): the temperature. Defaults to 0.7.
+
+    Returns:
+        Optional[str]: _description_
+    """
 
     if not EnvIO.exists_as_true('USE_OPENAI'):
         return None

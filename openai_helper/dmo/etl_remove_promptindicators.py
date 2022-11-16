@@ -6,7 +6,7 @@
 from baseblock import BaseObject
 
 
-class EtlRemoveIndicators(BaseObject):
+class EtlRemovePromptIndicators(BaseObject):
     """ A Generic Service to Extract Unstructured Output from an OpenAI response """
 
     def __init__(self):
@@ -16,6 +16,11 @@ class EtlRemoveIndicators(BaseObject):
             4-Aug-2022
             craigtrim@gmail.com
             *   https://bast-ai.atlassian.net/browse/COR-56
+        Updated:
+            16-Nov-2022
+            craigtrim@gmail.com
+            *   renamed from 'etl-remove-indicators' in pursuit of
+                https://github.com/craigtrim/openai-helper/issues/2
         """
         BaseObject.__init__(self, __name__)
 

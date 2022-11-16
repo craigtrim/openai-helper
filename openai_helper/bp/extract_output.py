@@ -3,13 +3,22 @@
 """ A Generic Service to Extract Unstructured Output from an OpenAI response """
 
 
+from os.path import sep as LINE_BREAK
+
+from typing import Optional
+
 from baseblock import Stopwatch
 from baseblock import BaseObject
 
-from openai_helper.dmo import EtlHandleTextCompletions
-from openai_helper.dmo import EtlRemoveIndicators
 from openai_helper.dmo import EtlReplaceCliches
+from openai_helper.dmo import EtlRemoveListIndicators
+from openai_helper.dmo import EtlHandleTextCompletions
 from openai_helper.dmo import EtlReplaceDuplicatedInput
+from openai_helper.dmo import EtlRemovePromptIndicators
+
+
+DOUBLE_LINE_BREAK = f"{LINE_BREAK}{LINE_BREAK}"
+CUSTOM_LINE_BREAK = ' CUSTOMLINEBREAK '
 
 
 class ExtractOutput(BaseObject):
@@ -37,44 +46,65 @@ class ExtractOutput(BaseObject):
             14-Sept-2022
             craigtrim@gmail.com
             *   make text pipeline dynamic via incoming parameters
+        Updated:
+            16-Sept-2022
+            craigtrim@gmail.com
+            *   add remove-list-indicators service
+                https://github.com/craigtrim/openai-helper/issues/2
         """
         BaseObject.__init__(self, __name__)
-        self._replace_duplicated_input = EtlReplaceDuplicatedInput().process
-        self._handle_text_completions = EtlHandleTextCompletions().process
-        self._remove_indicators = EtlRemoveIndicators().process
         self._replace_cliched_text = EtlReplaceCliches().process
+        self._remove_prompts = EtlRemovePromptIndicators().process
+        self._remove_list_indicators = EtlRemoveListIndicators().process
+        self._handle_text_completions = EtlHandleTextCompletions().process
+        self._replace_duplicated_input = EtlReplaceDuplicatedInput().process
 
     @staticmethod
-    def _output_text(d_result: dict) -> str:
+    def _output_text(d_result: dict) -> Optional[str]:
 
         if 'choices' in d_result['output']:
             choices = d_result['output']['choices']
 
             if len(choices):
+
                 output_text = choices[0]['text'].strip()
+                output_text = output_text.replace(
+                    LINE_BREAK, CUSTOM_LINE_BREAK)
 
-                # TODO: if line breaks become an issue, then parameterize this feature
-                output_text = output_text.replace('\n', ' CUSTOMLINEBREAK ')
-                while '\n\n' in output_text:
-                    output_text = output_text.replace('\n\n', '\n')
+                while DOUBLE_LINE_BREAK in output_text:
+                    output_text = output_text.replace(
+                        DOUBLE_LINE_BREAK, LINE_BREAK)
 
-                output_text = output_text.split('\n')[-1].strip()
+                output_text = output_text.split(LINE_BREAK)[-1].strip()
+                output_text = output_text.replace(
+                    CUSTOM_LINE_BREAK, LINE_BREAK)
 
-                output_text = output_text.replace(' CUSTOMLINEBREAK ', '\n')
                 while '  ' in output_text:
                     output_text = output_text.replace('  ', ' ')
-
                 return output_text
-
-        return None
 
     def process(self,
                 input_text: str,
                 d_result: dict,
                 replace_duplicated_input: bool = True,
                 handle_text_completions: bool = True,
-                remove_indicators: bool = True,
-                replace_cliched_text: bool = True) -> str or None:
+                remove_prompts: bool = True,
+                replace_cliched_text: bool = True,
+                remove_list_indicators: bool = True) -> Optional[str]:
+        """ Entry Point
+
+        Args:
+            input_text (str): the incoming text
+            d_result (dict): the OpenAI result
+            replace_duplicated_input (bool, optional): remove any duplicated text. Defaults to True.
+            handle_text_completions (bool, optional): cleanse dynamic completions. Defaults to True.
+            remove_prompts (bool, optional): remove any generic prompt material. Defaults to True.
+            replace_cliched_text (bool, optional): removes noisy and cliched output. Defaults to True.
+            remove_list_indicators (bool, optional): remove any list indicators. Defaults to True.
+
+        Returns:
+            str or None: the outgoing text
+        """
 
         sw = Stopwatch()
 
@@ -93,11 +123,14 @@ class ExtractOutput(BaseObject):
             if handle_text_completions:
                 text_pipeline.append(self._handle_text_completions)
 
-            if remove_indicators:
-                text_pipeline.append(self._remove_indicators)
+            if remove_prompts:
+                text_pipeline.append(self._remove_prompts)
 
             if replace_cliched_text:
                 text_pipeline.append(self._replace_cliched_text)
+
+            if remove_list_indicators:
+                text_pipeline.append(self._remove_list_indicators)
 
             return text_pipeline
 

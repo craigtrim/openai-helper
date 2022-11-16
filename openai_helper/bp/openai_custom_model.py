@@ -3,6 +3,8 @@
 """ Query a Custom Model in OpenAI """
 
 
+from typing import Optional
+
 from functools import lru_cache
 
 from baseblock import EnvIO
@@ -55,7 +57,7 @@ class OpenAICustomModel(BaseObject):
     def process(self,
                 input_text: str,
                 search_model: str = 'text-davinci-002',
-                threshold: float = 25.0) -> tuple or None:
+                threshold: float = 25.0) -> Optional[tuple]:
         """ Call a custom OpenAI Model
 
         Args:

@@ -22,8 +22,6 @@ install:
 	poetry install
 
 test:
-# 	TODO: 20220929; lot of mypi errors; solve later
-#	poetry run mypy openai_helper
 	poetry run pytest --disable-pytest-warnings
 
 build:
@@ -32,10 +30,10 @@ build:
 	poetry build
 
 integration:
-	poetry run python drivers/driver_openai_connector.py
-	poetry run python drivers/driver_extract_output.py "This is a test"
-	poetry run python drivers/driver_openai_custom_model.py
-	poetry run python drivers/driver_openai_helper.py
+	poetry run python drivers/openai_connector_driver.py
+	poetry run python drivers/extract_output_plac_driver.py "This is a test"
+	poetry run python drivers/openai_custom_model_driver.py
+	poetry run python drivers/openai_helper_driver.py
 
 linters:
 	poetry run pre-commit run --all-files

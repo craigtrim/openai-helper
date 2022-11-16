@@ -17,8 +17,8 @@ from openai_helper.dmo import NoOpenAIEvent
 class OpenAICompletion(BaseObject):
     """ Run a Completion against openAI """
 
-    __conn = None
     __run = None
+    __conn = None
 
     def __init__(self,
                  conn: object = None):
