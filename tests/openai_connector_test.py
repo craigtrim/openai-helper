@@ -1,4 +1,5 @@
-import os
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
 
 from openai_helper.dmo import OpenAIConnector
 

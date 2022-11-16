@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
+
 from openai_helper.svc import ExtractTopResponse
 
 
