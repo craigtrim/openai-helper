@@ -36,6 +36,7 @@ class RunOpenAICompletion(BaseObject):
             17-Nov-2022
             craigtrim@gmail.com
             *   handle error types
+                https://github.com/craigtrim/openai-helper/issues/3
 
         Args:
             conn (object): a connected instance of OpenAI

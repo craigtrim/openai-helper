@@ -34,7 +34,7 @@ def call(input_prompt: str,
         temperature=temperature,
         max_tokens=max_tokens)
 
-    if not d_result:
+    if not d_result or not d_result['output']:
         return None
 
     return ExtractOutput().process(
