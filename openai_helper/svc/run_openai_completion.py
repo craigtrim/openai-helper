@@ -3,12 +3,20 @@
 """ Run a Completion against openAI """
 
 
+from typing import Any
+from typing import Optional
+
 from pprint import pformat
 
 from baseblock import EnvIO
 from baseblock import Enforcer
 from baseblock import Stopwatch
 from baseblock import BaseObject
+
+from openai.error import RateLimitError
+from openai.error import PermissionError
+from openai.error import AuthenticationError
+from openai.error import ServiceUnavailableError
 
 from openai_helper.dmo import CompletionEventExtractor
 
@@ -24,6 +32,10 @@ class RunOpenAICompletion(BaseObject):
         Created:
             28-Jul-2022
             craigtrim@gmail.com
+        November:
+            17-Nov-2022
+            craigtrim@gmail.com
+            *   handle error types
 
         Args:
             conn (object): a connected instance of OpenAI
@@ -36,30 +48,54 @@ class RunOpenAICompletion(BaseObject):
             'OPENAI_CREATE_TIMEOUT', timeout)  # GRAFFL-380
 
     def _process(self,
-                 d_event: dict) -> dict:
+                 d_event: dict) -> Optional[dict]:
 
-        response = self._completion(
-            engine=d_event['engine'],
-            prompt=d_event['input_prompt'],
-            temperature=d_event['temperature'],
-            max_tokens=d_event['max_tokens'],
-            top_p=d_event['top_p'],
-            best_of=d_event['best_of'],
-            frequency_penalty=d_event['frequency_penalty'],
-            presence_penalty=d_event['presence_penalty'],
-            timeout=self._timeout  # GRAFFL-380
-        )
+        def invoke_call() -> Optional[Any]:
+            try:
 
-        d_result = dict(response)
-        if self.isEnabledForDebug:
-            Enforcer.is_dict(d_event)
-            self.logger.debug('\n'.join([
-                'OpenAI Call Completed',
-                pformat(d_result)]))
+                self._completion(
+                    engine=d_event['engine'],
+                    prompt=d_event['input_prompt'],
+                    temperature=d_event['temperature'],
+                    max_tokens=d_event['max_tokens'],
+                    top_p=d_event['top_p'],
+                    best_of=d_event['best_of'],
+                    frequency_penalty=d_event['frequency_penalty'],
+                    presence_penalty=d_event['presence_penalty'],
+                    timeout=self._timeout  # GRAFFL-380
+                )
+
+            # DESIGN NOTE
+            # Do not catch Error, Exception, or general error classes
+            # force this on the consumer ...
+
+            except RateLimitError as e:
+                self.logger.exception('Rate Limit Error', e)
+                return None
+
+            except PermissionError as e:
+                self.logger.exception('Rate Limit Error', e)
+                return None
+
+            except AuthenticationError as e:
+                self.logger.exception('Rate Limit Error', e)
+                return None
+
+            except ServiceUnavailableError as e:
+                self.logger.exception('Rate Limit Error', e)
+                return None
+
+        response = invoke_call()
+
+        if not response:
+            return {
+                'input': d_event,
+                'output': None
+            }
 
         return {
             'input': d_event,
-            'output': d_result
+            'output': dict(response)
         }
 
     def process(self,
@@ -101,6 +137,11 @@ class RunOpenAICompletion(BaseObject):
             dict: an output dictionary with two keys:
                 input: the input dictionary with validated parameters and default values where appropriate
                 output: the output event from OpenAI
+                    Unless RateLimitError, PermissionError, AuthenticationError, ServiceUnavailableError
+                    -   each of these errors is gracefully handled, and a dictionary result is still returned with 'output:None'
+                    This service will not catch Exception or Error classes generally
+                    -   the door is still left open for these and other error types to be thrown
+                        and the consumer must plan for this eventuality
         """
 
         sw = Stopwatch()
@@ -117,10 +158,18 @@ class RunOpenAICompletion(BaseObject):
 
         d_result = self._process(d_params)
 
-        self.logger.debug('\n'.join([
-            'OpenAI Event Execution Completed',
-            f'\tTotal Time: {str(sw)}',
-            f'\tInput Params:\n{pformat(d_params)}',
-            f'\tOutput Result:\n{pformat(d_result)}']))
+        if not d_result:
+            self.logger.error('\n'.join([
+                'OpenAI Event Execution Failed',
+                f'\tTotal Time: {str(sw)}',
+                f'\tInput Params:\n{pformat(d_params)}']))
+
+        if self.isEnabledForDebug:
+            Enforcer.is_dict(d_result)
+            self.logger.debug('\n'.join([
+                'OpenAI Event Execution Completed',
+                f'\tTotal Time: {str(sw)}',
+                f'\tInput Params:\n{pformat(d_params)}',
+                f'\tOutput Result:\n{pformat(d_result)}']))
 
         return d_result
