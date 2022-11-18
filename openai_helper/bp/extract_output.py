@@ -3,6 +3,7 @@
 """ A Generic Service to Extract Unstructured Output from an OpenAI response """
 
 
+from pprint import pformat
 from typing import Optional
 
 from baseblock import Stopwatch
@@ -81,6 +82,45 @@ class ExtractOutput(BaseObject):
                     output_text = output_text.replace('  ', ' ')
                 return output_text
 
+    @staticmethod
+    def _is_valid(d_result: dict) -> bool:
+        """ Validate Incoming Result Object
+
+        Reference:
+            https://github.com/craigtrim/openai-helper/issues/4
+
+        Args:
+            d_result (dict): the OpenAI result
+
+        Returns:
+            bool: True if valid (for purposes of this ETL routine)
+        """
+
+        if not d_result:
+            return False
+        if 'output' not in d_result:
+            return False
+        if not d_result['output']:
+            return False
+
+        d_output = d_result['output']
+        if 'choices' not in d_output:
+            return False
+        if not d_output['choices']:
+            return False
+
+        choices = d_output['choices']
+        if not choices:
+            return False
+
+        for d_choice in choices:
+            if 'text' not in d_choice:
+                return False
+            if not d_choice['text']:
+                return False
+
+        return True
+
     def process(self,
                 input_text: str,
                 d_result: dict,
@@ -108,8 +148,13 @@ class ExtractOutput(BaseObject):
 
         if not input_text:
             return None
-
-        if not d_result:
+        if not self._is_valid(d_result):
+            if d_result:
+                self.logger.error('\n'.join([
+                    'Unexpected OpenAI Result Object',
+                    f'\tResult: {pformat(d_result)}']))
+            else:
+                self.logger.error('Null OpenAI Object')
             return None
 
         def create_pipeline() -> list:
