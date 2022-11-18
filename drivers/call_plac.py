@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-""" Integration Test """
+""" Plac/Terminal Test """
 
 
 from baseblock import Enforcer
 
-from openai_helper.bp import ExtractOutput
+from openai_helper import call
 
 
 def extract_output(input_text: str):
@@ -15,24 +15,7 @@ def extract_output(input_text: str):
 
     Enforcer.is_str(input_text)
 
-    d_result = {
-        'output': {
-            'choices': [
-                {
-                    'text': input_text
-                }
-            ]
-        }
-    }
-
-    bp = ExtractOutput()
-    assert bp
-
-    result = bp.process(
-        input_text=input_text,
-        d_result=d_result)
-
-    Enforcer.is_str(result)
+    print(call(input_text))
 
 
 def main(input_text):
@@ -46,4 +29,5 @@ def main(input_text):
 
 if __name__ == '__main__':
     import plac
+
     plac.call(main)

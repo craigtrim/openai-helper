@@ -54,7 +54,7 @@ class RunOpenAICompletion(BaseObject):
         def invoke_call() -> Optional[Any]:
             try:
 
-                self._completion(
+                return self._completion(
                     engine=d_event['engine'],
                     prompt=d_event['input_prompt'],
                     temperature=d_event['temperature'],

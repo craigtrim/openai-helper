@@ -17,7 +17,7 @@ def extract_output(input_text: str):
 
     Enforcer.is_str(input_text)
 
-    call(input_text)
+    print(call(input_text))
 
     # nothing to really test; this is an observation case
 
