@@ -18,6 +18,10 @@ class CompletionEventExtractor(BaseObject):
         Created:
             28-Jul-2022
             craigtrim@gmail.com
+        Updated:
+            18-Nov-2022
+            craigtrim@gmail.com
+            *   add '_get*' top all methods to disambiguation from parameter list
 
         Args:
             timeout (int, optional): the timeout for the API call. Defaults to 15.
@@ -65,7 +69,7 @@ class CompletionEventExtractor(BaseObject):
             dict: a dictinoary of validated inputs with default values (where appropriate)
         """
 
-        def _input_prompt() -> str:
+        def _get_input_prompt() -> str:
             """ The Input Prompt to execute against OpenAI
 
             Raises:
@@ -117,7 +121,7 @@ class CompletionEventExtractor(BaseObject):
 
             return 1
 
-        def _temperature() -> float:
+        def _get_temperature() -> float:
             """ Control Randomness; Scale is 0.0 - 1.0
 
             Lower values approach predictable outputs and determinate behavior
@@ -137,7 +141,7 @@ class CompletionEventExtractor(BaseObject):
             # this seems to be a reasonable default
             return 0.7
 
-        def _max_tokens() -> int:
+        def _get_max_tokens() -> int:
             """ The Maximum Number of tokens to generate
             Requests can use up to 4,000 tokens (this takes the length of the input prompt into account)
             The higher this value, the more each request will cost
@@ -153,7 +157,7 @@ class CompletionEventExtractor(BaseObject):
             # whether this is reasonable depends entirely on the input prompt
             return 256
 
-        def _top_p() -> float:
+        def _get_top_p() -> float:
             """ Controls Diversity via Nucleus Sampling; no idea what this means
 
             Returns:
@@ -165,7 +169,7 @@ class CompletionEventExtractor(BaseObject):
             # I rarely change this setting
             return 1.0
 
-        def _frequency_penalty() -> int:
+        def _get_frequency_penalty() -> int:
             """ How much to penalize new tokens based on their frequency in the text so far
             Scale: 0.0 - 2.0
 
@@ -176,7 +180,7 @@ class CompletionEventExtractor(BaseObject):
                 return frequency_penalty
             return 0.0
 
-        def _presence_penalty() -> int:
+        def _get_presence_penalty() -> int:
             """ Seems similar to frequency penalty
 
             Returns:
@@ -188,12 +192,12 @@ class CompletionEventExtractor(BaseObject):
 
         return {
             'engine': _engine(),
-            'input_prompt': _input_prompt(),
-            'temperature': _temperature(),
-            'max_tokens': _max_tokens(),
-            'top_p': _top_p(),
+            'input_prompt': _get_input_prompt(),
+            'temperature': _get_temperature(),
+            'max_tokens': _get_max_tokens(),
+            'top_p': _get_top_p(),
             'best_of': _best_of(),
-            'frequency_penalty': _frequency_penalty(),
-            'presence_penalty': _presence_penalty(),
+            'frequency_penalty': _get_frequency_penalty(),
+            'presence_penalty': _get_presence_penalty(),
             'timeout': self._timeout
         }

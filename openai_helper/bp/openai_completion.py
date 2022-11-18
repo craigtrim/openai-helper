@@ -3,6 +3,7 @@
 """ Run a Completion against openAI """
 
 
+from typing import Optional
 from typing import Callable
 
 from baseblock import EnvIO
@@ -55,13 +56,13 @@ class OpenAICompletion(BaseObject):
 
     def run(self,
             input_prompt: str,
-            engine: str = None,
-            best_of: int = None,
-            temperature: float = None,
-            max_tokens: int = None,
-            top_p: float = None,
-            frequency_penalty: int = None,
-            presence_penalty: int = None) -> dict:
+            engine: Optional[str] = None,
+            best_of: Optional[int] = None,
+            temperature: Optional[float] = None,
+            max_tokens: Optional[int] = None,
+            top_p: Optional[float] = None,
+            frequency_penalty: Optional[int] = None,
+            presence_penalty: Optional[int] = None) -> dict:
         """ Run an OpenAI event
 
         Args:
@@ -96,6 +97,9 @@ class OpenAICompletion(BaseObject):
 
         if not EnvIO.is_true('USE_OPENAI'):
             return NoOpenAIEvent().process(input_prompt, engine)
+
+        if self.isEnabledForDebug:
+            Enforcer.is_str(input_prompt)
 
         d_result = self._run()(input_prompt=input_prompt,
                                engine=engine,
