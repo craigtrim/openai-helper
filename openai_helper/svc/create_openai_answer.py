@@ -74,7 +74,8 @@ class CreateOpenAIAnswer(BaseObject):
         response = self._process(input_text=input_text,
                                  search_model=search_model)
 
-        response = dict(response)
+        if response:
+            response = dict(response)
 
         output_events.append(self._generate_event(
             service_name=self.component_name(),
