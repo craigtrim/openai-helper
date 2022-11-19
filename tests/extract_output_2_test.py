@@ -17,7 +17,7 @@ def test_extract_output():
         d_result=None)
 
     assert not ExtractOutput().process(
-        input_text="this is a test",
+        input_text='this is a test',
         d_result=None)
 
     assert not ExtractOutput().process(
@@ -25,39 +25,39 @@ def test_extract_output():
         d_result={})
 
     assert not ExtractOutput().process(
-        input_text="this is a test",
-        d_result={"input": "this is a test"})
+        input_text='this is a test',
+        d_result={'input': 'this is a test'})
 
     assert not ExtractOutput().process(
-        input_text="this is a test",
-        d_result={"input": "this is a test",
-                  "output": None})
+        input_text='this is a test',
+        d_result={'input': 'this is a test',
+                  'output': None})
 
     assert not ExtractOutput().process(
-        input_text="this is a test",
-        d_result={"input": "this is a test",
-                  "output": {}})
+        input_text='this is a test',
+        d_result={'input': 'this is a test',
+                  'output': {}})
 
     assert not ExtractOutput().process(
-        input_text="this is a test",
-        d_result={"input": "this is a test",
-                  "output": {
-                      "choices": None
+        input_text='this is a test',
+        d_result={'input': 'this is a test',
+                  'output': {
+                      'choices': None
                   }})
 
     assert not ExtractOutput().process(
-        input_text="this is a test",
-        d_result={"input": "this is a test",
-                  "output": {
-                      "choices": []
+        input_text='this is a test',
+        d_result={'input': 'this is a test',
+                  'output': {
+                      'choices': []
                   }})
 
     assert not ExtractOutput().process(
-        input_text="this is a test",
-        d_result={"input": "this is a test",
-                  "output": {
-                      "choices": [{
-                          "text": None
+        input_text='this is a test',
+        d_result={'input': 'this is a test',
+                  'output': {
+                      'choices': [{
+                          'text': None
                       }]
                   }})
 
