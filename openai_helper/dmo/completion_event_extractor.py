@@ -45,7 +45,7 @@ class CompletionEventExtractor(BaseObject):
             input_prompt (str): The Input Prompt to execute against OpenAI
             engine (str, optional): The OpenAI model (engine) to run against. Defaults to None.
                 Options as of July, 2022 are:
-                    'text-davinci-002'
+                    'text-davinci-003'
                     'text-curie-001',
                     'text-babbage-001'
                     'text-ada-001'
@@ -90,7 +90,7 @@ class CompletionEventExtractor(BaseObject):
             """ The OpenAI model (engine) to run against
 
             Options as of July, 2022 are:
-                'text-davinci-002'
+                'text-davinci-003'
                 'text-curie-001',
                 'text-babbage-001'
                 'text-ada-001'
@@ -105,7 +105,7 @@ class CompletionEventExtractor(BaseObject):
 
             # the best all-around engine as of July, 2022
             # but also the most expensive
-            return 'text-davinci-002'
+            return 'text-davinci-003'
 
         def _best_of() -> int:
             """ Generates Multiple Server-Side Combinations and only selects the best

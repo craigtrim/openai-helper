@@ -18,7 +18,7 @@ def test_completion():
     bp.run(input_prompt='Generate a one random number between 1 and 5000')
 
     d_result = bp.run(
-        engine='text-davinci-002',
+        engine='text-davinci-003',
         temperature=1.0,
         max_tokens=256,
         input_prompt="Rewrite the input in grammatical English:\n\nInput: You believe I can help you understand what trust yourself? don't you?\nOutput:\n\n")

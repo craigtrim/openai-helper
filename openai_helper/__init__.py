@@ -30,7 +30,7 @@ def call(input_prompt: str,
 
     d_result = bp.run(
         input_prompt=input_prompt,
-        engine='text-davinci-002',
+        engine='text-davinci-003',
         temperature=temperature,
         max_tokens=max_tokens)
 

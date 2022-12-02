@@ -39,7 +39,7 @@ The output will contain both the input and output values:
 {
    "input":{
       "best_of":1,
-      "engine":"text-davinci-002",
+      "engine":"text-davinci-003",
       "frequency_penalty":0.0,
       "input_prompt":"Rewrite the input in grammatical English:\n\nInput: You believe I can help you understand what trust yourself? don't you?\nOutput:\n\n",
       "max_tokens":256,
@@ -88,7 +88,7 @@ def process(self,
         input_prompt (str): The Input Prompt to execute against OpenAI
         engine (str, optional): The OpenAI model (engine) to run against. Defaults to None.
             Options as of July, 2022 are:
-                'text-davinci-002'
+                'text-davinci-003'
                 'text-curie-001',
                 'text-babbage-001'
                 'text-ada-001'

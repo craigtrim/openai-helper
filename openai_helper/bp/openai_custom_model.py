@@ -56,7 +56,7 @@ class OpenAICustomModel(BaseObject):
     @lru_cache
     def process(self,
                 input_text: str,
-                search_model: str = 'text-davinci-002',
+                search_model: str = 'text-davinci-003',
                 threshold: float = 25.0) -> Optional[tuple]:
         """ Call a custom OpenAI Model
 

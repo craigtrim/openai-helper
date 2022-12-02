@@ -114,7 +114,7 @@ class RunOpenAICompletion(BaseObject):
             input_prompt (str): The Input Prompt to execute against OpenAI
             engine (str, optional): The OpenAI model (engine) to run against. Defaults to None.
                 Options as of July, 2022 are:
-                    'text-davinci-002'
+                    'text-davinci-003'
                     'text-curie-001',
                     'text-babbage-001'
                     'text-ada-001'
