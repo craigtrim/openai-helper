@@ -1,7 +1,7 @@
 # Full path of the file
 $file = 'setup.py'
 $ProjectName = "openai-helper"
-$ProjectVersion = "0.1.16"
+$ProjectVersion = "0.1.26"
 
 # remove the file if it exists
 if (Test-Path -Path $file -PathType Leaf) {

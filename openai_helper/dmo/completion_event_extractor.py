@@ -22,6 +22,10 @@ class CompletionEventExtractor(BaseObject):
             18-Nov-2022
             craigtrim@gmail.com
             *   add '_get*' top all methods to disambiguation from parameter list
+        Updated:
+            7-Dec-2022
+            craigtrim@gmail.com
+            *   default engine to 'text-davinci-003'
 
         Args:
             timeout (int, optional): the timeout for the API call. Defaults to 15.
@@ -44,8 +48,9 @@ class CompletionEventExtractor(BaseObject):
         Args:
             input_prompt (str): The Input Prompt to execute against OpenAI
             engine (str, optional): The OpenAI model (engine) to run against. Defaults to None.
-                Options as of July, 2022 are:
+                Options as of December, 2022 are:
                     'text-davinci-003'
+                    'text-davinci-002'
                     'text-curie-001',
                     'text-babbage-001'
                     'text-ada-001'
@@ -89,8 +94,9 @@ class CompletionEventExtractor(BaseObject):
         def _engine() -> str:
             """ The OpenAI model (engine) to run against
 
-            Options as of July, 2022 are:
-                'text-davinci-003'
+            Options as of December, 2022 are:
+                'text-davinci-003',
+                'text-davinci-002',
                 'text-curie-001',
                 'text-babbage-001'
                 'text-ada-001'
@@ -103,9 +109,8 @@ class CompletionEventExtractor(BaseObject):
                     Enforcer.is_str(engine)
                 return engine
 
-            # the best all-around engine as of July, 2022
-            # but also the most expensive
-            return 'text-davinci-003'
+            return EnvIO.str_or_default(env_var='OPENAI_ENGINE',
+                                        default='text-davinci-003')
 
         def _best_of() -> int:
             """ Generates Multiple Server-Side Combinations and only selects the best
