@@ -32,11 +32,16 @@ class RunOpenAICompletion(BaseObject):
         Created:
             28-Jul-2022
             craigtrim@gmail.com
-        November:
+        Updated:
             17-Nov-2022
             craigtrim@gmail.com
             *   handle error types
                 https://github.com/craigtrim/openai-helper/issues/3
+        Updated:
+            30-Dec-2022
+            craigtrim@gmail.com
+            *   ensure MAX_TOKENS does not exceed API max
+                https://github.com/craigtrim/openai-helper/issues/6
 
         Args:
             conn (object): a connected instance of OpenAI
@@ -147,6 +152,9 @@ class RunOpenAICompletion(BaseObject):
         """
 
         sw = Stopwatch()
+
+        if max_tokens and max_tokens > 4096:
+            max_tokens = 4096
 
         d_params = self._extract_event(
             input_prompt=input_prompt,
