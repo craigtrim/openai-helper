@@ -154,7 +154,14 @@ class RunOpenAICompletion(BaseObject):
         sw = Stopwatch()
 
         if max_tokens and max_tokens > 4096:
-            max_tokens = 4096
+            max_tokens = EnvIO.int_or_default('OPENAI_MAXTOKENS_LIMIT', 4096)
+
+        # guard against errors like this:
+        #       This model's maximum context length is 4097 tokens,
+        #       however you requested 4143 tokens (2607 in your prompt; 1536 for the completion).
+        #       Please reduce your prompt; or completion length.
+        if max_tokens and len(input_prompt) + max_tokens > 4096:
+            max_tokens = EnvIO.int_or_default('OPENAI_MAXTOKENS_LIMIT', 4096)
 
         d_params = self._extract_event(
             input_prompt=input_prompt,
