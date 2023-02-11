@@ -58,11 +58,27 @@ class EtlRemoveListIndicators(BaseObject):
     def _strip_numbered_list(input_text: str) -> str:
         for i in range(1, 16):
 
+            key = f'{i}:'
+            if input_text.startswith(key):
+                return input_text[len(key):].strip()
+
             key = f'{i}.'
             if input_text.startswith(key):
                 return input_text[len(key):].strip()
 
             key = f'{i})'
+            if input_text.startswith(key):
+                return input_text[len(key):].strip()
+
+            key = f'variation {i}:'
+            if input_text.startswith(key):
+                return input_text[len(key):].strip()
+
+            key = f'variation {i}.'
+            if input_text.startswith(key):
+                return input_text[len(key):].strip()
+
+            key = f'variation {i})'
             if input_text.startswith(key):
                 return input_text[len(key):].strip()
 

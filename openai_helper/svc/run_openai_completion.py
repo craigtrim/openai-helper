@@ -153,6 +153,9 @@ class RunOpenAICompletion(BaseObject):
 
         sw = Stopwatch()
 
+        if not max_tokens or not type(max_tokens) == int:
+            max_tokens = len(input_prompt) * 2
+
         if max_tokens and max_tokens > 4096:
             max_tokens = EnvIO.int_or_default('OPENAI_MAXTOKENS_LIMIT', 4096)
 
