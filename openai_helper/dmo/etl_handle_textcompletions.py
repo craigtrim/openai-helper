@@ -52,4 +52,7 @@ class EtlHandleTextCompletions(BaseObject):
             while '  ' in output_text:
                 output_text = output_text.replace('  ', ' ')
 
+        if output_text.startswith('"') and output_text.endswith('"'):
+            output_text = output_text[1:len(output_text) - 1]
+
         return output_text

@@ -17,15 +17,16 @@ repos:
       - id: double-quote-string-fixer
       - id: requirements-txt-fixer
 
-  - repo: https://github.com/pre-commit/mirrors-autopep8
-    rev: "v1.7.0" # Use the sha / tag you want to point at
-    hooks:
-      - id: autopep8
+  # 20230212; these are useless
+  # - repo: https://github.com/pre-commit/mirrors-autopep8
+  #   rev: "v1.7.0" # Use the sha / tag you want to point at
+  #   hooks:
+  #     - id: autopep8
 
-  - repo: https://github.com/kynan/nbstripout
-    rev: 0.6.1
-    hooks:
-      - id: nbstripout
+  # - repo: https://github.com/kynan/nbstripout
+  #   rev: 0.6.1
+  #   hooks:
+  #     - id: nbstripout
 
   # 20221031;   keep this commented out
   #             I feel like i do a better job at manual sorting
