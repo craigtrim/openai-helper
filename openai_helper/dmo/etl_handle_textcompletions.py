@@ -55,4 +55,10 @@ class EtlHandleTextCompletions(BaseObject):
         if output_text.startswith('"') and output_text.endswith('"'):
             output_text = output_text[1:len(output_text) - 1]
 
+        # Would I not agree that this is the most important issue of our time? [Sarcastic tone]
+        if '[' in output_text and ']' in output_text:
+            x = output_text.index('[')
+            y = output_text.index(']')
+            output_text = f'{output_text[:x]}{output_text[y + 1:]}'.strip()
+
         return output_text
