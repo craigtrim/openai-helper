@@ -20,7 +20,7 @@ def call(input_prompt: str,
         temperature (float, optional): the temperature. Defaults to 0.7.
 
     Returns:
-        Optional[str]: _description_
+        Optional[str]: the result (if any)
     """
 
     if not EnvIO.exists_as_true('USE_OPENAI'):
@@ -40,3 +40,20 @@ def call(input_prompt: str,
     return ExtractOutput().process(
         input_text=input_prompt,
         d_result=d_result)
+
+
+def call2(input_prompt: str) -> Optional[str]:
+    """ Call OpenAI
+
+    Not a very creative function name, but basically 'full-auto' call
+
+    Args:
+        input_prompt (str): a defined input prompt
+
+    Returns:
+        Optional[str]: the result (if any)
+    """
+    return call(
+        input_prompt=input_prompt,
+        max_tokens=len(input_prompt) * 2,
+        temperature=1.0)
