@@ -1,3 +1,5 @@
+import logging
+
 from typing import Optional
 from baseblock import EnvIO
 
@@ -53,7 +55,23 @@ def call2(input_prompt: str) -> Optional[str]:
     Returns:
         Optional[str]: the result (if any)
     """
-    return call(
-        input_prompt=input_prompt,
-        max_tokens=len(input_prompt) * 2,
-        temperature=1.0)
+
+    max_tokens = len(input_prompt) * 2
+    if max_tokens > 4000:
+        return None
+
+    try:
+
+        result = call(
+            input_prompt=input_prompt,
+            max_tokens=max_tokens,
+            temperature=1.0)
+
+        logging.getLogger(__name__).debug('\n'.join([
+            'OpenAI Call Completed',
+            f'\tInput Prompt: {input_prompt}',
+            f'\tMax Tokens: {max_tokens}',
+            f'\tResult: {result}']))
+
+    except Exception:
+        pass
