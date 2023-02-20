@@ -73,5 +73,7 @@ def call2(input_prompt: str) -> Optional[str]:
             f'\tMax Tokens: {max_tokens}',
             f'\tResult: {result}']))
 
+        return result
+
     except Exception:
         pass
