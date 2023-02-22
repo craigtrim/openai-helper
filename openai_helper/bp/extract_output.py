@@ -187,6 +187,9 @@ class ExtractOutput(BaseObject):
             if not output_text or not len(output_text):
                 return None
 
+        if output_text.startswith('"') and output_text.endswith('"'):
+            output_text = output_text[1:-1]
+
         if self.isEnabledForDebug:
             self.logger.debug('\n'.join([
                 'OpenAI Output Extraction Completed',

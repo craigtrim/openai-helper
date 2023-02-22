@@ -21,7 +21,7 @@ mccabe @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/37/6e/69/
 nodeenv @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/1a/03/e5/de6684b555631eb3f02f87073b2e23d5ef94639e918bef36960f706d0e/nodeenv-1.7.0-py2.py3-none-any.whl
 numpy @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/0d/9c/68/3d881c4f75df1d18611c724a80f1345efee168bad1a717638dd301f3f6/numpy-1.24.2-cp38-cp38-win_amd64.whl
 openai @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/e0/e9/ae/30c86c9cb8d96282fbe4667b4e27dfba7bb96a4607cbd64caa3bfb5140/openai-0.20.0.tar.gz
-openai-helper==0.1.35
+openai-helper==0.1.36
 openpyxl @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/aa/7a/a3/2aed5b79f8848ce05f7133224688809c4db7f0ecbad311e857ffae39f0/openpyxl-3.1.1-py2.py3-none-any.whl
 packaging @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/a5/11/69/db7a1c9814119195caa92a54beffb890fe475c0d2cdcb6443af473f1a6/packaging-23.0-py3-none-any.whl
 pandas @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/fb/40/33/1ab650eb02275f0630e718cc94d734e42731089da2ca55cd41e84897d8/pandas-1.5.3-cp38-cp38-win_amd64.whl

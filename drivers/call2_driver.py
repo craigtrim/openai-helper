@@ -11,7 +11,7 @@ from openai_helper import call2
 def test_call2(input_prompt: str):
 
     result = call2(input_prompt)
-    print(f"Result: {result}")
+    print(f'Result: {result}')
     assert result
 
 
