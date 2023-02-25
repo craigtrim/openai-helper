@@ -9,6 +9,7 @@ from typing import Optional
 from baseblock import Stopwatch
 from baseblock import BaseObject
 
+from openai_helper.dmo import EtlRemoveEmojis
 from openai_helper.dmo import EtlReplaceCliches
 from openai_helper.dmo import EtlRemoveListIndicators
 from openai_helper.dmo import EtlHandleTextCompletions
@@ -50,8 +51,14 @@ class ExtractOutput(BaseObject):
             craigtrim@gmail.com
             *   add remove-list-indicators service
                 https://github.com/craigtrim/openai-helper/issues/2
+        Updated:
+            24-Feb-2023
+            craigtrim@gmail.com
+            *   add remove-emojis service
+                https://github.com/craigtrim/openai-helper/issues/8
         """
         BaseObject.__init__(self, __name__)
+        self._remove_emojis = EtlRemoveEmojis().process
         self._replace_cliched_text = EtlReplaceCliches().process
         self._remove_prompts = EtlRemovePromptIndicators().process
         self._remove_list_indicators = EtlRemoveListIndicators().process
@@ -128,7 +135,8 @@ class ExtractOutput(BaseObject):
                 handle_text_completions: bool = True,
                 remove_prompts: bool = True,
                 replace_cliched_text: bool = True,
-                remove_list_indicators: bool = True) -> Optional[str]:
+                remove_list_indicators: bool = True,
+                remove_emojis: bool = True) -> Optional[str]:
         """ Entry Point
 
         Args:
@@ -139,6 +147,9 @@ class ExtractOutput(BaseObject):
             remove_prompts (bool, optional): remove any generic prompt material. Defaults to True.
             replace_cliched_text (bool, optional): removes noisy and cliched output. Defaults to True.
             remove_list_indicators (bool, optional): remove any list indicators. Defaults to True.
+            remove_emojis (bool, optional): remove any emojis OpenAI might provide. Defaults to True.
+                Reference:
+                    https://github.com/craigtrim/openai-helper/issues/8
 
         Returns:
             str or None: the outgoing text
@@ -174,6 +185,9 @@ class ExtractOutput(BaseObject):
 
             if remove_list_indicators:
                 text_pipeline.append(self._remove_list_indicators)
+
+            if remove_emojis:
+                text_pipeline.append(self._remove_emojis)
 
             return text_pipeline
 

@@ -6,3 +6,4 @@ from .etl_replace_cliches import EtlReplaceCliches
 from .etl_replace_duplicatedinput import EtlReplaceDuplicatedInput
 from .no_openai_event import NoOpenAIEvent
 from .etl_remove_listindicators import EtlRemoveListIndicators
+from .etl_remove_emojis import EtlRemoveEmojis
