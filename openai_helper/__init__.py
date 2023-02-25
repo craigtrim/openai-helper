@@ -13,13 +13,17 @@ from .bp.extract_output import ExtractOutput
 
 def call(input_prompt: str,
          max_tokens: int = 256,
-         temperature: float = 0.7) -> Optional[str]:
+         temperature: float = 0.7,
+         remove_emojis: bool = True) -> Optional[str]:
     """ Call OpenAI
 
     Args:
         input_prompt (str): a defined input prompt
         max_tokens (int, optional): max tokens to use. Defaults to 256.
         temperature (float, optional): the temperature. Defaults to 0.7.
+        remove_emojis (bool, optional): remove any emojis OpenAI might provide. Defaults to True.
+            Reference:
+                https://github.com/craigtrim/openai-helper/issues/8
 
     Returns:
         Optional[str]: the result (if any)
@@ -41,16 +45,21 @@ def call(input_prompt: str,
 
     return ExtractOutput().process(
         input_text=input_prompt,
-        d_result=d_result)
+        d_result=d_result,
+        remove_emojis=remove_emojis)
 
 
-def call2(input_prompt: str) -> Optional[str]:
+def call2(input_prompt: str,
+          remove_emojis: bool = True) -> Optional[str]:
     """ Call OpenAI
 
     Not a very creative function name, but basically 'full-auto' call
 
     Args:
         input_prompt (str): a defined input prompt
+        remove_emojis (bool, optional): remove any emojis OpenAI might provide. Defaults to True.
+            Reference:
+                https://github.com/craigtrim/openai-helper/issues/8
 
     Returns:
         Optional[str]: the result (if any)
@@ -65,7 +74,8 @@ def call2(input_prompt: str) -> Optional[str]:
         result = call(
             input_prompt=input_prompt,
             max_tokens=max_tokens,
-            temperature=1.0)
+            temperature=1.0,
+            remove_emojis=remove_emojis)
 
         logging.getLogger(__name__).debug('\n'.join([
             'OpenAI Call Completed',
