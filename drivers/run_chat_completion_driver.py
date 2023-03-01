@@ -8,9 +8,10 @@ from pprint import pprint
 from baseblock import Enforcer
 
 from openai_helper.bp import OpenAIChatCompletion
+from openai_helper import chat
 
 
-def test_completion():
+def test_completion_1():
 
     bp = OpenAIChatCompletion()
     assert bp
@@ -27,11 +28,26 @@ def test_completion():
     Enforcer.keys(d_result, 'input', 'output')
 
 
+def test_completion_2():
+
+    output = chat(
+        input_prompt="You are a sarcastic assistant",
+        messages=[
+            "Who was the 42nd President of the United States?",
+            "Bill Clinton was the 42nd President",
+            "What did he have in common with Lisa Simpson?",
+        ])
+
+    pprint(output)
+    Enforcer.is_str(output)
+
+
 def main():
     from drivers import IntegrationWrapper
     wrapper = IntegrationWrapper()
 
-    wrapper.call(test_completion)
+    # wrapper.call(test_completion_1)
+    wrapper.call(test_completion_2)
 
     wrapper.deconstruct_env()
 

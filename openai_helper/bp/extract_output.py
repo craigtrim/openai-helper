@@ -3,6 +3,7 @@
 """ A Generic Service to Extract Unstructured Output from an OpenAI response """
 
 
+from pprint import pprint
 from pprint import pformat
 from typing import Optional
 
@@ -68,12 +69,24 @@ class ExtractOutput(BaseObject):
     @staticmethod
     def _output_text(d_result: dict) -> Optional[str]:
 
+        pprint(d_result)
+
         if 'choices' in d_result['output']:
             choices = d_result['output']['choices']
 
+            print ("choices: ", choices)
+            raise ValueError
+
             if len(choices):
 
-                output_text = choices[0]['text'].strip()
+                def get_output_text() -> str:
+                    if 'text' in choices[0]:
+                        return choices[0]['text'].strip()
+                    if 'message' in choices[0]:
+                        return choices[0]['message']['content'].strip()
+                    raise NotImplementedError
+
+                output_text = get_output_text()
                 output_text = output_text.replace(
                     LINE_BREAK, CUSTOM_LINE_BREAK)
 

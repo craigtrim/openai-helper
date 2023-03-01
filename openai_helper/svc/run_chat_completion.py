@@ -28,8 +28,7 @@ class RunChatCompletion(BaseObject):
     """ Run a Chat Completion against OpenAI """
 
     def __init__(self,
-                 conn: object,
-                 timeout: int = 5):
+                 conn: object):
         """ Change Log
 
         Created:
@@ -77,6 +76,8 @@ class RunChatCompletion(BaseObject):
                 return None
 
         response = invoke_call()
+        print (response)
+        raise ValueError('response')
 
         if not response:
             return {
@@ -95,8 +96,23 @@ class RunChatCompletion(BaseObject):
         """ Run an OpenAI event
 
         Args:
-            input_prompt (str): The Input Prompt to execute against OpenAI
-            messages (List[str]): ...
+            input_prompt (str): a defined input prompt
+
+                Sample Input Prompt:
+                    "You are a helpful assistant."
+
+            messages (List[str]): The messages to execute the chat completion upon
+
+                Sample Messages:
+                    [
+                        "Who won the world series in 2020?",
+                        "The Los Angeles Dodgers won the World Series in 2020.",
+                        "Where was it played?"
+                    ]
+
+                There should be an odd-number of messages in the list, with 
+                    odd-numbered entries as user questions
+                    even-numbered entries as system responses
 
         Returns:
             dict: an output dictionary with two keys:
@@ -116,6 +132,9 @@ class RunChatCompletion(BaseObject):
             messages=messages)
 
         d_result = self._process(input_messages)
+
+        print("d_result: ", d_result)
+        raise ValueError
 
         if not d_result:
             self.logger.error('\n'.join([

@@ -42,8 +42,23 @@ class OpenAIChatCompletion(BaseObject):
         """ Run an OpenAI event
 
         Args:
-            input_prompt (str): The Input Prompt to execute against OpenAI
-            messages (List[str]): ...
+            input_prompt (str): a defined input prompt
+
+                Sample Input Prompt:
+                    "You are a helpful assistant."
+
+            messages (List[str]): The messages to execute the chat completion upon
+
+                Sample Messages:
+                    [
+                        "Who won the world series in 2020?",
+                        "The Los Angeles Dodgers won the World Series in 2020.",
+                        "Where was it played?"
+                    ]
+
+                There should be an odd-number of messages in the list, with 
+                    odd-numbered entries as user questions
+                    even-numbered entries as system responses
 
         Returns:
             dict: an output dictionary with two keys:
