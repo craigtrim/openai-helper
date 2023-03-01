@@ -51,13 +51,13 @@ class RunChatCompletion(BaseObject):
             try:
 
                 return self._completion(
-                    model="gpt-3.5-turbo",
+                    model='gpt-3.5-turbo',
                     messages=input_messages
                 )
 
-            # DESIGN NOTE
-            # Do not catch Error, Exception, or general error classes
-            # force this on the consumer ...
+                # DESIGN NOTE
+                # Do not catch Error, Exception, or general error classes
+                # force this on the consumer ...
 
             except RateLimitError as e:
                 self.logger.exception('Rate Limit Error', e)
@@ -76,8 +76,6 @@ class RunChatCompletion(BaseObject):
                 return None
 
         response = invoke_call()
-        print (response)
-        raise ValueError('response')
 
         if not response:
             return {
@@ -110,7 +108,7 @@ class RunChatCompletion(BaseObject):
                         "Where was it played?"
                     ]
 
-                There should be an odd-number of messages in the list, with 
+                There should be an odd-number of messages in the list, with
                     odd-numbered entries as user questions
                     even-numbered entries as system responses
 
@@ -132,9 +130,6 @@ class RunChatCompletion(BaseObject):
             messages=messages)
 
         d_result = self._process(input_messages)
-
-        print("d_result: ", d_result)
-        raise ValueError
 
         if not d_result:
             self.logger.error('\n'.join([

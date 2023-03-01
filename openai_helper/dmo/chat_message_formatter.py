@@ -34,24 +34,24 @@ class ChatMessageFormatter(BaseObject):
 
         if len(messages) % 2 != 1:
             self.logger.error('\n'.join([
-                "Expect Interaction Sequences in Odd-Numbered Multiples",
-                f"\tActual Messages:\n{messages}"]))
+                'Expect Interaction Sequences in Odd-Numbered Multiples',
+                f'\tActual Messages:\n{messages}']))
             raise ValueError
 
         outputs = [
-            {"role": "system", "content": input_prompt},
+            {'role': 'system', 'content': input_prompt},
         ]
 
         for i in range(len(messages)):
 
             def get_role() -> str:
                 if i % 2 == 0:
-                    return "user"
-                return "assistant"
+                    return 'user'
+                return 'assistant'
 
             outputs.append({
-                "role": get_role(),
-                "content": messages[i]
+                'role': get_role(),
+                'content': messages[i]
             })
 
         return outputs

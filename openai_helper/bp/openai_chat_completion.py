@@ -56,7 +56,7 @@ class OpenAIChatCompletion(BaseObject):
                         "Where was it played?"
                     ]
 
-                There should be an odd-number of messages in the list, with 
+                There should be an odd-number of messages in the list, with
                     odd-numbered entries as user questions
                     even-numbered entries as system responses
 

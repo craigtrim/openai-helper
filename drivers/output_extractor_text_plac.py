@@ -5,7 +5,7 @@
 
 from baseblock import Enforcer
 
-from openai_helper.bp import ExtractOutput
+from openai_helper.dmo import OutputExtractorText
 
 
 def extract_output(input_text: str):
@@ -25,10 +25,10 @@ def extract_output(input_text: str):
         }
     }
 
-    bp = ExtractOutput()
-    assert bp
+    extract = OutputExtractorText().process
+    assert extract
 
-    result = bp.process(
+    result = extract(
         input_text=input_text,
         d_result=d_result)
 

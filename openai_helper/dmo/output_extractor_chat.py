@@ -22,41 +22,15 @@ DOUBLE_LINE_BREAK = f'{LINE_BREAK}{LINE_BREAK}'
 CUSTOM_LINE_BREAK = ' CUSTOMLINEBREAK '
 
 
-class ExtractOutput(BaseObject):
+class OutputExtractorChat(BaseObject):
     """ A Generic Service to Extract Unstructured Output from an OpenAI response """
 
     def __init__(self):
         """
         Created:
-            17-Mar-2022
+            1-Mar-2023
             craigtrim@gmail.com
-            *   in pursuit of
-                https://github.com/grafflr/graffl-core/issues/222
-        Updated:
-            18-Mar-2022
-            craigtrim@gmail.com
-            *   handle text completions
-                https://github.com/grafflr/graffl-core/issues/224
-        Updated:
-            4-Aug-2022
-            craigtrim@gmail.com
-            *   migrated to 'openai-helper' in pursuit of
-                https://bast-ai.atlassian.net/browse/COR-56
-                https://github.com/craigtrim/openai-helper/issues/1
-        Updated:
-            14-Sept-2022
-            craigtrim@gmail.com
-            *   make text pipeline dynamic via incoming parameters
-        Updated:
-            16-Sept-2022
-            craigtrim@gmail.com
-            *   add remove-list-indicators service
-                https://github.com/craigtrim/openai-helper/issues/2
-        Updated:
-            24-Feb-2023
-            craigtrim@gmail.com
-            *   add remove-emojis service
-                https://github.com/craigtrim/openai-helper/issues/8
+            *   https://github.com/craigtrim/openai-helper/issues/9
         """
         BaseObject.__init__(self, __name__)
         self._remove_emojis = EtlRemoveEmojis().process
@@ -69,19 +43,12 @@ class ExtractOutput(BaseObject):
     @staticmethod
     def _output_text(d_result: dict) -> Optional[str]:
 
-        pprint(d_result)
-
         if 'choices' in d_result['output']:
             choices = d_result['output']['choices']
-
-            print ("choices: ", choices)
-            raise ValueError
 
             if len(choices):
 
                 def get_output_text() -> str:
-                    if 'text' in choices[0]:
-                        return choices[0]['text'].strip()
                     if 'message' in choices[0]:
                         return choices[0]['message']['content'].strip()
                     raise NotImplementedError
@@ -107,7 +74,7 @@ class ExtractOutput(BaseObject):
         """ Validate Incoming Result Object
 
         Reference:
-            https://github.com/craigtrim/openai-helper/issues/4
+            https://github.com/craigtrim/openai-helper/issues/9#issuecomment-1451017415
 
         Args:
             d_result (dict): the OpenAI result
@@ -134,9 +101,9 @@ class ExtractOutput(BaseObject):
             return False
 
         for d_choice in choices:
-            if 'text' not in d_choice:
+            if 'message' not in d_choice:
                 return False
-            if not d_choice['text']:
+            if not d_choice['message']:
                 return False
 
         return True

@@ -8,3 +8,5 @@ from .no_openai_event import NoOpenAIEvent
 from .etl_remove_listindicators import EtlRemoveListIndicators
 from .etl_remove_emojis import EtlRemoveEmojis
 from .chat_message_formatter import ChatMessageFormatter
+from .output_extractor_chat import OutputExtractorChat
+from .output_extractor_text import OutputExtractorText

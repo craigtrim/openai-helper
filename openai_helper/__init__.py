@@ -10,7 +10,8 @@ from .dmo import *
 
 from .bp.openai_text_completion import OpenAITextCompletion
 from .bp.openai_chat_completion import OpenAIChatCompletion
-from .bp.extract_output import ExtractOutput
+from .dmo import OutputExtractorText
+from .dmo import OutputExtractorChat
 
 
 def chat(input_prompt: str,
@@ -33,7 +34,7 @@ def chat(input_prompt: str,
                     "Where was it played?"
                 ]
 
-            There should be an odd-number of messages in the list, with 
+            There should be an odd-number of messages in the list, with
                 odd-numbered entries as user questions
                 even-numbered entries as system responses
 
@@ -55,13 +56,10 @@ def chat(input_prompt: str,
             input_prompt=input_prompt,
             messages=messages)
 
-        print(d_result)
-        raise ValueError
-
         if not d_result or not d_result['output']:
             return None
 
-        result = ExtractOutput().process(
+        result = OutputExtractorChat().process(
             input_text=input_prompt,
             d_result=d_result,
             remove_emojis=remove_emojis)
@@ -75,7 +73,7 @@ def chat(input_prompt: str,
         return result
 
     except Exception as e:
-        print (e)
+        print(e)
 
 
 def call(input_prompt: str,
@@ -110,7 +108,7 @@ def call(input_prompt: str,
     if not d_result or not d_result['output']:
         return None
 
-    return ExtractOutput().process(
+    return OutputExtractorText().process(
         input_text=input_prompt,
         d_result=d_result,
         remove_emojis=remove_emojis)
