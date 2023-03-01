@@ -2,11 +2,11 @@
 # -*- coding: UTF-8 -*-
 
 
-from openai_helper.bp import OpenAICompletion
+from openai_helper.bp import OpenAITextCompletion
 
 
 def test_orchestrator():
-    assert OpenAICompletion()
+    assert OpenAITextCompletion()
 
 
 def main():

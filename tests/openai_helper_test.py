@@ -2,12 +2,12 @@
 # -*- coding: UTF-8 -*-
 
 
-from openai_helper.bp import OpenAICompletion
+from openai_helper.bp import OpenAITextCompletion
 
 
 def test_bp():
 
-    bp = OpenAICompletion()
+    bp = OpenAITextCompletion()
     assert bp
 
 

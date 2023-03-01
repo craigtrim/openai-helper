@@ -11,12 +11,12 @@ from baseblock import Enforcer
 from baseblock import BaseObject
 
 from openai_helper.dmo import OpenAIConnector
-from openai_helper.svc import RunOpenAICompletion
+from openai_helper.svc import RunTextCompletion
 from openai_helper.dmo import NoOpenAIEvent
 
 
-class OpenAICompletion(BaseObject):
-    """ Run a Completion against openAI """
+class OpenAITextCompletion(BaseObject):
+    """ Run a Text Completion against openAI """
 
     __run = None
     __conn = None
@@ -36,6 +36,11 @@ class OpenAICompletion(BaseObject):
             29-Sept-2022
             craigtrim@gmail.com
             *   integrate 'no-openai-event'
+        Updated:
+            1-Mar-2023
+            craigtrim@gmail.com
+            *   renamed from 'openai-completion' in pursuit of
+                https://github.com/craigtrim/openai-helper/issues/9
 
         Args:
             conn (object): a connection to openAI
@@ -51,7 +56,7 @@ class OpenAICompletion(BaseObject):
 
     def _run(self) -> Callable:
         if not self.__run:
-            self.__run = RunOpenAICompletion(self._conn()).process
+            self.__run = RunTextCompletion(self._conn()).process
         return self.__run
 
     def run(self,

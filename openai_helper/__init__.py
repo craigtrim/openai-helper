@@ -7,7 +7,7 @@ from .bp import *
 from .svc import *
 from .dmo import *
 
-from .bp.openai_completion import OpenAICompletion
+from .bp.openai_text_completion import OpenAITextCompletion
 from .bp.extract_output import ExtractOutput
 
 
@@ -32,7 +32,7 @@ def call(input_prompt: str,
     if not EnvIO.exists_as_true('USE_OPENAI'):
         return None
 
-    bp = OpenAICompletion()
+    bp = OpenAITextCompletion()
 
     d_result = bp.run(
         input_prompt=input_prompt,

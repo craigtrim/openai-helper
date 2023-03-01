@@ -7,21 +7,21 @@ from pprint import pprint
 
 from baseblock import Enforcer
 
-from openai_helper.bp import OpenAITextCompletion
+from openai_helper.bp import OpenAIChatCompletion
 
 
 def test_completion():
 
-    bp = OpenAITextCompletion()
+    bp = OpenAIChatCompletion()
     assert bp
 
-    bp.run(input_prompt='Generate a one random number between 1 and 5000')
-
     d_result = bp.run(
-        engine='text-davinci-003',
-        temperature=1.0,
-        max_tokens=256,
-        input_prompt="Rewrite the input in grammatical English:\n\nInput: You believe I can help you understand what trust yourself? don't you?\nOutput:\n\n")
+        input_prompt="You are a sarcastic assistant",
+        messages=[
+            "Who won the world series in 2020?",
+            "The Los Angeles Dodgers won the World Series in 2020.",
+            "Where was it played?",
+        ])
 
     pprint(d_result)
     Enforcer.keys(d_result, 'input', 'output')

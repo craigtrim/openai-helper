@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-""" Run a Completion against openAI """
+""" Run a TextCompletion against OpenAI """
 
 
 from typing import Any
@@ -21,8 +21,8 @@ from openai.error import ServiceUnavailableError
 from openai_helper.dmo import CompletionEventExtractor
 
 
-class RunOpenAICompletion(BaseObject):
-    """ Run a Completion against openAI """
+class RunTextCompletion(BaseObject):
+    """ Run a TextCompletion against OpenAI """
 
     def __init__(self,
                  conn: object,
@@ -42,6 +42,11 @@ class RunOpenAICompletion(BaseObject):
             craigtrim@gmail.com
             *   ensure MAX_TOKENS does not exceed API max
                 https://github.com/craigtrim/openai-helper/issues/6
+        Updated:
+            1-Mar-2023
+            craigtrim@gmail.com
+            *   renamed from 'run-openai-completion' in pursuit of
+                https://github.com/craigtrim/openai-helper/issues/9
 
         Args:
             conn (object): a connected instance of OpenAI
