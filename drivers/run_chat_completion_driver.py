@@ -84,15 +84,80 @@ def test_completion_5():
     Enforcer.is_str(output)
 
 
+def test_completion_6():
+
+    output = chat(
+        input_prompt='Find one appropriate emoji for this topic.',
+        messages=[
+            'Climate Change',
+        ])
+
+    print(output)
+    Enforcer.is_str(output)
+
+
+def test_completion_7():
+
+    output = chat(
+        input_prompt='Ask for clarification on this question.',
+        messages=[
+            'What are the impacts of global warming on transportation?',
+        ])
+
+    print(output)
+    Enforcer.is_str(output)
+
+
+def test_completion_8():
+
+    output = chat(
+        input_prompt='Is the following question related to climate change?  Answer YES or NO only.',
+        messages=[
+            'What are the impacts of global warming on transportation?',
+        ])
+
+    print(output)
+    Enforcer.is_str(output)
+
+
+def test_completion_9():
+
+    output = chat(
+        input_prompt='Indicate if the following input has negative sentiment or disagreement.  Answer Yes, No, or Uncertain only.',
+        messages=[
+            'Oh sure, like I should believe you',
+        ])
+
+    print(output)
+    Enforcer.is_str(output)
+
+
+def test_completion_10():
+
+    output = chat(
+        input_prompt='You are a chatbot that reluctantly answers questions with sarcastic responses.  Someone keeps bothering ypu.  How does you respond?',
+        messages=[
+            '',
+        ])
+
+    print(output)
+    Enforcer.is_str(output)
+
+
 def main():
     from drivers import IntegrationWrapper
     wrapper = IntegrationWrapper()
 
-    wrapper.call(test_completion_1)
-    wrapper.call(test_completion_2)
-    wrapper.call(test_completion_3)
-    wrapper.call(test_completion_4)
-    wrapper.call(test_completion_5)
+    # wrapper.call(test_completion_1)
+    # wrapper.call(test_completion_2)
+    # wrapper.call(test_completion_3)
+    # wrapper.call(test_completion_4)
+    # wrapper.call(test_completion_5)
+    # wrapper.call(test_completion_6)
+    # wrapper.call(test_completion_7)
+    # wrapper.call(test_completion_8)
+    # wrapper.call(test_completion_9)
+    wrapper.call(test_completion_10)
 
     wrapper.deconstruct_env()
 

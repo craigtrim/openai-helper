@@ -1,20 +1,16 @@
+from .dmo import OutputExtractorChat
+from .dmo import OutputExtractorText
+from .bp.openai_chat_completion import OpenAIChatCompletion
+from .bp.openai_text_completion import OpenAITextCompletion
+from .dmo import *
+from .svc import *
+from .bp import *
+from baseblock import Enforcer
+from baseblock import EnvIO
+from typing import Optional
+from typing import List
 import logging
 logger = logging.getLogger(__name__)
-
-from typing import List
-from typing import Optional
-
-from baseblock import EnvIO
-from baseblock import Enforcer
-
-from .bp import *
-from .svc import *
-from .dmo import *
-
-from .bp.openai_text_completion import OpenAITextCompletion
-from .bp.openai_chat_completion import OpenAIChatCompletion
-from .dmo import OutputExtractorText
-from .dmo import OutputExtractorChat
 
 
 def chat(input_prompt: str,
@@ -61,7 +57,9 @@ def chat(input_prompt: str,
         if not EnvIO.exists_as_true('USE_OPENAI'):
             return None
 
-        if type(messages) == str:
+        if messages is None:
+            messages = ['']
+        elif type(messages) == str:
             messages = [messages]
 
         if logger.isEnabledFor(logging.DEBUG):
