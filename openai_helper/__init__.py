@@ -1,8 +1,11 @@
 import logging
+logger = logging.getLogger(__name__)
 
 from typing import List
 from typing import Optional
+
 from baseblock import EnvIO
+from baseblock import Enforcer
 
 from .bp import *
 from .svc import *
@@ -15,7 +18,7 @@ from .dmo import OutputExtractorChat
 
 
 def chat(input_prompt: str,
-         messages: List[str],
+         messages: List[str] or str,
          remove_emojis: bool = True) -> Optional[str]:
     """ Call OpenAI Chat Completion
 
@@ -25,18 +28,26 @@ def chat(input_prompt: str,
             Sample Input Prompt:
                 "You are a helpful assistant."
 
-        messages (List[str]): The messages to execute the chat completion upon
+        messages (List[str] or str): The messages to execute the chat completion upon
 
-            Sample Messages:
+            Sample Messages (Dialog):
                 [
                     "Who won the world series in 2020?",
                     "The Los Angeles Dodgers won the World Series in 2020.",
                     "Where was it played?"
                 ]
 
-            There should be an odd-number of messages in the list, with
-                odd-numbered entries as user questions
-                even-numbered entries as system responses
+                There should be an odd-number of messages in the list, with
+                    odd-numbered entries as user questions
+                    even-numbered entries as system responses
+
+            Sample Messages
+                [
+                    "Who won the world series in 2020?",
+                ]
+
+                A single entry means this model can be used as a text completion, much like 'text-davinci-003'
+
 
         remove_emojis (bool, optional): remove any emojis OpenAI might provide. Defaults to True.
             Reference:
@@ -49,6 +60,12 @@ def chat(input_prompt: str,
 
         if not EnvIO.exists_as_true('USE_OPENAI'):
             return None
+
+        if type(messages) == str:
+            messages = [messages]
+
+        if logger.isEnabledFor(logging.DEBUG):
+            Enforcer.is_list_of_str(messages)
 
         bp = OpenAIChatCompletion()
 
@@ -64,11 +81,12 @@ def chat(input_prompt: str,
             d_result=d_result,
             remove_emojis=remove_emojis)
 
-        logging.getLogger(__name__).debug('\n'.join([
-            'OpenAI Call Completed',
-            f'\tInput Prompt: {input_prompt}',
-            f'\tMessages: {messages}',
-            f'\tResult: {result}']))
+        if logger.isEnabledFor(logging.DEBUG):
+            logging.getLogger(__name__).debug('\n'.join([
+                'OpenAI Call Completed',
+                f'\tInput Prompt: {input_prompt}',
+                f'\tMessages: {messages}',
+                f'\tResult: {result}']))
 
         return result
 
@@ -142,11 +160,12 @@ def call2(input_prompt: str,
             temperature=1.0,
             remove_emojis=remove_emojis)
 
-        logging.getLogger(__name__).debug('\n'.join([
-            'OpenAI Call Completed',
-            f'\tInput Prompt: {input_prompt}',
-            f'\tMax Tokens: {max_tokens}',
-            f'\tResult: {result}']))
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug('\n'.join([
+                'OpenAI Call Completed',
+                f'\tInput Prompt: {input_prompt}',
+                f'\tMax Tokens: {max_tokens}',
+                f'\tResult: {result}']))
 
         return result
 

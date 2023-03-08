@@ -42,12 +42,57 @@ def test_completion_2():
     Enforcer.is_str(output)
 
 
+def test_completion_3():
+
+    output = chat(
+        input_prompt='You are a friendly salesman',
+        messages=[
+            'Why should I buy 5G?',
+            '5G is so hot right now that even my grandpa wants to get in on the action! Investing in 5G technology will help you stay ahead of the competition and give your business a huge advantage.',
+            'Why should I buy from you?',
+        ])
+
+    print(output)
+    Enforcer.is_str(output)
+
+
+def test_completion_4():
+
+    output = chat(
+        input_prompt='You are a salesman',
+        messages=[
+            'Why should I buy 5G?',
+            '5G is so hot right now that even my grandpa wants to get in on the action! Investing in 5G technology will help you stay ahead of the competition and give your business a huge advantage.',
+            'Why should I buy from you?',
+            'We have years of experience in the 5G industry and boast a diverse portfolio of satisfied customers. Our commitment to customer service and quality, plus competitive pricing makes us the top choice for 5G solutions?',
+            'Why buy now?',
+        ])
+
+    print(output)
+    Enforcer.is_str(output)
+
+
+def test_completion_5():
+
+    output = chat(
+        input_prompt='Pretend you are a Professor about to rush off to class.  Respond to this in a friendly and helpful manner.',
+        messages=[
+            'Could you please provide more examples of how global warming is impacting transportation, and clarify how the burning of fossil fuels are causing these changes?',
+        ])
+
+    print(output)
+    Enforcer.is_str(output)
+
+
 def main():
     from drivers import IntegrationWrapper
     wrapper = IntegrationWrapper()
 
-    # wrapper.call(test_completion_1)
+    wrapper.call(test_completion_1)
     wrapper.call(test_completion_2)
+    wrapper.call(test_completion_3)
+    wrapper.call(test_completion_4)
+    wrapper.call(test_completion_5)
 
     wrapper.deconstruct_env()
 
