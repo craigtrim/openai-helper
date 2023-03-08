@@ -8,13 +8,14 @@ from .bp import *
 from baseblock import Enforcer
 from baseblock import EnvIO
 from typing import Optional
+from typing import Union
 from typing import List
 import logging
 logger = logging.getLogger(__name__)
 
 
 def chat(input_prompt: str,
-         messages: List[str] or str,
+         messages: Optional[Union[List[str], str]],
          remove_emojis: bool = True) -> Optional[str]:
     """ Call OpenAI Chat Completion
 
@@ -24,7 +25,7 @@ def chat(input_prompt: str,
             Sample Input Prompt:
                 "You are a helpful assistant."
 
-        messages (List[str] or str): The messages to execute the chat completion upon
+        messages (Optional[Union[List[str], str]]): The optional messages to execute the chat completion upon
 
             Sample Messages (Dialog):
                 [
@@ -43,6 +44,12 @@ def chat(input_prompt: str,
                 ]
 
                 A single entry means this model can be used as a text completion, much like 'text-davinci-003'
+
+
+            Sample Messages
+                None
+
+                The system will respond entirely based on the prompt if no input is provided.
 
 
         remove_emojis (bool, optional): remove any emojis OpenAI might provide. Defaults to True.

@@ -144,6 +144,18 @@ def test_completion_10():
     Enforcer.is_str(output)
 
 
+def test_completion_11():
+
+    output = chat(
+        input_prompt='Pretend you are a salesman.  You want to sell me the metaverse.  Limit your response to two sentences.  Feel free to use humor in your last sentence.',
+        messages=[
+            '',
+        ])
+
+    print(output)
+    Enforcer.is_str(output)
+
+
 def main():
     from drivers import IntegrationWrapper
     wrapper = IntegrationWrapper()
@@ -157,7 +169,8 @@ def main():
     # wrapper.call(test_completion_7)
     # wrapper.call(test_completion_8)
     # wrapper.call(test_completion_9)
-    wrapper.call(test_completion_10)
+    # wrapper.call(test_completion_10)
+    wrapper.call(test_completion_11)
 
     wrapper.deconstruct_env()
 
