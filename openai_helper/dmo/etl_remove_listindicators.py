@@ -56,7 +56,10 @@ class EtlRemoveListIndicators(BaseObject):
 
     @staticmethod
     def _strip_numbered_list(input_text: str) -> str:
-        for i in range(1, 16):
+        for i in range(1, 100):
+
+            if str(i) not in input_text:
+                continue
 
             key = f'{i}:'
             if input_text.startswith(key):
