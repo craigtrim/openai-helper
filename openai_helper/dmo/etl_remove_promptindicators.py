@@ -67,6 +67,18 @@ class EtlRemovePromptIndicators(BaseObject):
         if "Marv's" in output_text:
             output_text = output_text.replace("Marv's", 'its')
 
+        if "I'm an AI language model designed by OpenAI":
+            output_text = output_text.replace(
+                "I'm an AI language model designed by OpenAI", "I'm a bot")
+
+        if 'designed by OpenAI':
+            output_text = output_text.replace(
+                'designed by OpenAI', '')
+
+        if "I'm an AI language model":
+            output_text = output_text.replace(
+                "I'm an AI language model", "I'm a bot")
+
         if 'Two-Sentence Horror Story:' in output_text:
             output_text = output_text.replace(
                 'Two-Sentence Horror Story:', '').strip()

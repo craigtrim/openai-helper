@@ -13,8 +13,8 @@ cryptography @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/65/
 distlib @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/39/da/c3/ab17b81e190e93caf2917bf84aeb94d0f40def8ab957f0d40534680d78/distlib-0.3.6-py2.py3-none-any.whl
 entrypoints @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/e1/87/5c/599600a1c57c18ae8d12a6b599957cfbe1667774faa8167ca7c152c988/entrypoints-0.4-py3-none-any.whl
 et-xmlfile @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/54/fd/16/7449f65d172d97e10b198adf308f9254ed6c37e55795a24184502b4883/et_xmlfile-1.1.0-py3-none-any.whl
-exceptiongroup @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/d3/7f/6b/10f6e6e0967604bfde200ef502f79994f92268326a594f2bde94ac7602/exceptiongroup-1.1.0-py3-none-any.whl
-filelock @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/2b/cf/95/fef8d90d8a2e06b1c5087a95dc480251ba5b634b49f35a8c2a042fd479/filelock-3.9.0-py3-none-any.whl
+exceptiongroup @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/e0/24/bb/ea71db430c96aa8c7c61268f16734ac7c30f3754644e9aa0947ce26046/exceptiongroup-1.1.1-py3-none-any.whl
+filelock @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/57/b4/07/ddbe5f114594329c028419e538ff7a18bda2481b561eb895eec65c6a3a/filelock-3.9.1-py3-none-any.whl
 flake8 @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/0d/4b/21/8c766e4015d3210fdbf8d1091620d52db306cd8c85ba8f2b37ebf48a75/flake8-4.0.1-py2.py3-none-any.whl
 flakeheaven @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/32/c8/4a/a731c3fa7fc9d03434898eb8096cd1e045f18245dc81f9762aedcc14a8/flakeheaven-3.2.1-py3-none-any.whl
 frozenlist @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/80/da/e5/a99d4a1343507106724a84b3c63c62c30e161255928e5efd97a262654b/frozenlist-1.3.3-cp38-cp38-win_amd64.whl
@@ -26,7 +26,7 @@ multidict @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/2a/4c/
 nodeenv @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/1a/03/e5/de6684b555631eb3f02f87073b2e23d5ef94639e918bef36960f706d0e/nodeenv-1.7.0-py2.py3-none-any.whl
 numpy @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/0d/9c/68/3d881c4f75df1d18611c724a80f1345efee168bad1a717638dd301f3f6/numpy-1.24.2-cp38-cp38-win_amd64.whl
 openai @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/59/04/7f/1364ec6eb06b7e5525cdfb77c895870e27d24e75f40c39a0ab18e441ea/openai-0.27.2-py3-none-any.whl
-openai-helper==0.1.43
+openai-helper==0.1.44
 openpyxl @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/aa/7a/a3/2aed5b79f8848ce05f7133224688809c4db7f0ecbad311e857ffae39f0/openpyxl-3.1.1-py2.py3-none-any.whl
 packaging @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/a5/11/69/db7a1c9814119195caa92a54beffb890fe475c0d2cdcb6443af473f1a6/packaging-23.0-py3-none-any.whl
 pandas @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/fb/40/33/1ab650eb02275f0630e718cc94d734e42731089da2ca55cd41e84897d8/pandas-1.5.3-cp38-cp38-win_amd64.whl
@@ -50,5 +50,5 @@ tomli @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/36/bd/11/9
 tqdm @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/45/3b/83/11e9b65ddcb85f0eaa322e1d88111befee9da675e5fe1a2b952ea8fc03/tqdm-4.65.0-py3-none-any.whl
 unicodedata2 @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/38/1f/5e/d8c8b6fed84e6813d314bfdf1725a24db3085d274b2fcd37716d55c01d/unicodedata2-15.0.0-cp38-cp38-win_amd64.whl
 urllib3 @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/ef/2d/af/fa06784093389a1a269e2da55022b9a01445f55405ccacad13396b421a/urllib3-1.26.15-py2.py3-none-any.whl
-virtualenv @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/50/71/42/3e2a2c521a6eab203e067c110ee3bcfd3fabbb63f15b756e813e0593be/virtualenv-20.20.0-py3-none-any.whl
+virtualenv @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/ab/55/3a/08d2725badd58fe326000c3aca562e585ced1d9c6d874f277e4aa67b82/virtualenv-20.21.0-py3-none-any.whl
 yarl @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/5d/81/7a/246c44a412555a74267d5815ae0fb47e614b19a22414030f8311ee56d1/yarl-1.8.2-cp38-cp38-win_amd64.whl

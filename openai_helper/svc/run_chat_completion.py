@@ -64,15 +64,15 @@ class RunChatCompletion(BaseObject):
                 return None
 
             except PermissionError as e:
-                self.logger.exception('Rate Limit Error', e)
+                self.logger.exception('Permission Error', e)
                 return None
 
             except AuthenticationError as e:
-                self.logger.exception('Rate Limit Error', e)
+                self.logger.exception('Authentication Error', e)
                 return None
 
             except ServiceUnavailableError as e:
-                self.logger.exception('Rate Limit Error', e)
+                self.logger.exception('Service Unavailable Error', e)
                 return None
 
         response = invoke_call()
