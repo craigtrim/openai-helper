@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 def chat(input_prompt: str,
-         messages: Optional[Union[List[str], str]],
+         messages: Optional[Union[List[str], str]] = None,
          remove_emojis: bool = True) -> Optional[str]:
     """ Call OpenAI Chat Completion
 
