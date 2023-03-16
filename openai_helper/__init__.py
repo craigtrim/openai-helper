@@ -1,15 +1,16 @@
-from .dmo import OutputExtractorChat
-from .dmo import OutputExtractorText
-from .bp.openai_chat_completion import OpenAIChatCompletion
-from .bp.openai_text_completion import OpenAITextCompletion
-from .dmo import *
-from .svc import *
-from .bp import *
-from baseblock import Enforcer
-from baseblock import EnvIO
-from typing import Optional
-from typing import Union
 from typing import List
+from typing import Union
+from typing import Optional
+from baseblock import EnvIO
+from baseblock import Enforcer
+from .bp import *
+from .svc.extract_primary_topic import ExtractPrimaryTopic
+from .svc import *
+from .dmo import *
+from .bp.openai_text_completion import OpenAITextCompletion
+from .bp.openai_chat_completion import OpenAIChatCompletion
+from .dmo import OutputExtractorText
+from .dmo import OutputExtractorChat
 import logging
 logger = logging.getLogger(__name__)
 

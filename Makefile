@@ -30,6 +30,7 @@ build:
 	poetry build
 
 integration:
+	poetry run python drivers/extract_primary_topic_driver.py
 	poetry run python drivers/output_extractor_text_driver.py
 	poetry run python drivers/output_extractor_text_plac.py "This is a test"
 	poetry run python drivers/openai_connector_driver.py
