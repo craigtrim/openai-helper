@@ -47,6 +47,11 @@ class RunTextCompletion(BaseObject):
             craigtrim@gmail.com
             *   renamed from 'run-openai-completion' in pursuit of
                 https://github.com/craigtrim/openai-helper/issues/9
+        Updated:
+            24-Mar-2023
+            craigtrim@gmail.com
+            *   fix max-tokens defect
+                https://github.com/craigtrim/openai-helper/issues/10
 
         Args:
             conn (object): a connected instance of OpenAI
@@ -158,22 +163,25 @@ class RunTextCompletion(BaseObject):
 
         sw = Stopwatch()
 
-        if not max_tokens or not type(max_tokens) == int:
-            max_tokens = len(input_prompt) * 2
+        if not max_tokens:
+            max_tokens = 4000
 
-        if max_tokens and max_tokens > 4096:
-            max_tokens = EnvIO.int_or_default('OPENAI_MAXTOKENS_LIMIT', 4096)
+        # if not max_tokens or not type(max_tokens) == int:
+        #     max_tokens = len(input_prompt) * 2
 
-        # guard against errors like this:
-        #       This model's maximum context length is 4097 tokens,
-        #       however you requested 4143 tokens (2607 in your prompt; 1536 for the completion).
-        #       Please reduce your prompt; or completion length.
-        if max_tokens and len(input_prompt) + max_tokens > 4096:
-            max_tokens = EnvIO.int_or_default('OPENAI_MAXTOKENS_LIMIT', 4096)
-            self.logger.debug('\n'.join([
-                'Model Token Limit',
-                f'\tMax Tokens: {max_tokens}',
-                f'\tLength of Input Prompt: {len(input_prompt)}']))
+        # if max_tokens and max_tokens > 4096:
+        #     max_tokens = EnvIO.int_or_default('OPENAI_MAXTOKENS_LIMIT', 4096)
+
+        # # guard against errors like this:
+        # #       This model's maximum context length is 4097 tokens,
+        # #       however you requested 4143 tokens (2607 in your prompt; 1536 for the completion).
+        # #       Please reduce your prompt; or completion length.
+        # if max_tokens and len(input_prompt) + max_tokens > 4096:
+        #     max_tokens = EnvIO.int_or_default('OPENAI_MAXTOKENS_LIMIT', 4096)
+        #     self.logger.debug('\n'.join([
+        #         'Model Token Limit',
+        #         f'\tMax Tokens: {max_tokens}',
+        #         f'\tLength of Input Prompt: {len(input_prompt)}']))
 
         d_params = self._extract_event(
             input_prompt=input_prompt,
