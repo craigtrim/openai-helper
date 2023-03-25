@@ -28,6 +28,8 @@ class ExtractPrimaryTopic(BaseObject):
         Created:
             16-Mar-2023
             craigtrim@gmail.com
+            #   TODO:   this should likely go into a service called openai-usage
+                        that consumes openai-helper and provides custom prompts and extractions like this
         """
         BaseObject.__init__(self, __name__)
 
@@ -69,7 +71,7 @@ class ExtractPrimaryTopic(BaseObject):
         if _result.startswith('none '):
             return None
 
-        result = result.replace("'", "")
+        result = result.replace("'", '')
         result = result.replace('"', '')
 
         if result.endswith('.'):

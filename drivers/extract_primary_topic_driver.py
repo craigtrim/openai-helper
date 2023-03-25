@@ -12,7 +12,7 @@ def test_service():
     assert primary_topic
 
     result = primary_topic(
-        "Our team has extensive experience and expertise in customizing Salesforce to meet unique business needs.")
+        'Our team has extensive experience and expertise in customizing Salesforce to meet unique business needs.')
     print(result)
 
 

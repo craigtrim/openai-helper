@@ -103,7 +103,8 @@ def chat(input_prompt: str,
 def call(input_prompt: str,
          max_tokens: int = 256,
          temperature: float = 0.7,
-         remove_emojis: bool = True) -> Optional[str]:
+         remove_emojis: bool = True,
+         engine: str = 'text-davinci-003') -> Optional[str]:
     """ Call OpenAI Text Completion
 
     Args:
@@ -111,8 +112,7 @@ def call(input_prompt: str,
         max_tokens (int, optional): max tokens to use. Defaults to 256.
         temperature (float, optional): the temperature. Defaults to 0.7.
         remove_emojis (bool, optional): remove any emojis OpenAI might provide. Defaults to True.
-            Reference:
-                https://github.com/craigtrim/openai-helper/issues/8
+        engine (str, optional): the LLM engine. Defaults to 'text-davinci-003'.
 
     Returns:
         Optional[str]: the result (if any)
@@ -125,7 +125,7 @@ def call(input_prompt: str,
 
     d_result = bp.run(
         input_prompt=input_prompt,
-        engine='text-davinci-003',
+        engine=engine,
         temperature=temperature,
         max_tokens=max_tokens)
 
@@ -139,7 +139,8 @@ def call(input_prompt: str,
 
 
 def call2(input_prompt: str,
-          remove_emojis: bool = True) -> Optional[str]:
+          remove_emojis: bool = True,
+          engine: str = 'text-davinci-003') -> Optional[str]:
     """ Call OpenAI
 
     Not a very creative function name, but basically 'full-auto' call
@@ -149,6 +150,7 @@ def call2(input_prompt: str,
         remove_emojis (bool, optional): remove any emojis OpenAI might provide. Defaults to True.
             Reference:
                 https://github.com/craigtrim/openai-helper/issues/8
+        engine (str, optional): the LLM engine. Defaults to 'text-davinci-003'.
 
     Returns:
         Optional[str]: the result (if any)
@@ -164,6 +166,7 @@ def call2(input_prompt: str,
             input_prompt=input_prompt,
             max_tokens=max_tokens,
             temperature=1.0,
+            engine=engine,
             remove_emojis=remove_emojis)
 
         if logger.isEnabledFor(logging.DEBUG):
