@@ -21,11 +21,11 @@ def test_completion_1():
         messages=[
             'What meal do you treasure the most?',
             'I was partial to ice cream.',
-            "Do you have a favorite food?",
+            'Do you have a favorite food?',
             'I was partial to ice cream.',
-            "Which cuisine are you passionate about and why?",
+            'Which cuisine are you passionate about and why?',
             'I was partial to ice cream.',
-            "what is your favorite food.",
+            'what is your favorite food.',
         ])
 
     pprint(d_result)
