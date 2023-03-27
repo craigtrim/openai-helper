@@ -41,7 +41,7 @@ integration:
 
 linters:
 	poetry run pre-commit run --all-files
-	poetry run flakeheaven lint
+#	poetry run flakeheaven lint
 
 freeze:
 	poetry run pip freeze > requirements.txt

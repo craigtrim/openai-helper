@@ -11,7 +11,7 @@ description = "OpenAI Helper for Easy I/O"
 license = "MIT"
 name = "openai-helper"
 readme = "README.md"
-version = "0.1.48"
+version = "0.1.49"
 
 keywords = ["openai", "api", "utility"]
 repository = "https://github.com/craigtrim/openai-helper"
@@ -26,6 +26,7 @@ classifiers = [
 baseblock = "*"
 openai = "^0.27.0"
 python = "^3.8.5"
+tiktoken = "*"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "*"

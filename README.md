@@ -114,3 +114,5 @@ def process(self,
             output: the output event from OpenAI
     """
 ```
+
+## Counting Tokens (tiktoken)

@@ -11,8 +11,33 @@ from .bp.openai_text_completion import OpenAITextCompletion
 from .bp.openai_chat_completion import OpenAIChatCompletion
 from .dmo import OutputExtractorText
 from .dmo import OutputExtractorChat
+from .dmo import InputTokenCounter
 import logging
 logger = logging.getLogger(__name__)
+
+token_counter = InputTokenCounter().process
+
+
+def num_of_tokens(messages: List[str] or str,
+                  model: str = 'gpt-3.5-turbo-0301') -> int:
+    """ Count the Number of Tokens in an Input String
+
+    Counting tokens is not the same as "tokenizing a string" and counting the result
+    OpenAI has a different technique for arriving at this count and this varies by model
+
+    Reference:
+        https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb
+
+    Args:
+        messages (List[str] or str): a List of strings or simply an input string
+        model (str, optional): the model to use for counting tokens. Defaults to "gpt-3.5-turbo-0301".
+            token counting varies between models
+            however, if you don't know your OpenAI model just leave this value at the default
+
+    Returns:
+        int: the total tokens
+    """
+    return token_counter(messages=messages, model=model)
 
 
 def chat(input_prompt: str,
