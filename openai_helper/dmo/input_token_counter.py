@@ -12,13 +12,13 @@ from baseblock import BaseObject
 
 
 class InputTokenCounter(BaseObject):
-    """ Count Tokens accurately with Tiktoken 
+    """ Count Tokens accurately with Tiktoken
 
     Encoding Name       OpenAI Models
     cl100k_base	        gpt-4
                         gpt-3.5-turbo
                         text-embedding-ada-002
-    p50k_base           Codex models 
+    p50k_base           Codex models
                         text-davinci-002
                         text-davinci-003
     r50k_base           GPT-3 models like davinci
@@ -46,16 +46,16 @@ class InputTokenCounter(BaseObject):
 
             except KeyError:
                 self.logger.error('\n'.join([
-                    "Warning: model not found.",
-                    f"\tUsing cl100k_base encoding."]))
+                    'Warning: model not found.',
+                    f'\tUsing cl100k_base encoding.']))
                 self.__d_encoding[model] = encoding_for_model(
-                    "cl100k_base")
+                    'cl100k_base')
 
         return self.__d_encoding[model]
 
     def process(self,
                 messages: List[str],
-                model: str = "gpt-3.5-turbo-0301"):
+                model: str = 'gpt-3.5-turbo-0301'):
         """ Count the Number of Tokens in an Input String
 
         Counting tokens is not the same as "tokenizing a string" and counting the result
@@ -79,22 +79,22 @@ class InputTokenCounter(BaseObject):
 
         encoding = self._cached_model(model)
 
-        if model == "gpt-3.5-turbo":
+        if model == 'gpt-3.5-turbo':
             self.logger.warning(
-                "Warning: gpt-3.5-turbo may change over time. Returning num tokens assuming gpt-3.5-turbo-0301.")
-            return self.process(messages, model="gpt-3.5-turbo-0301")
+                'Warning: gpt-3.5-turbo may change over time. Returning num tokens assuming gpt-3.5-turbo-0301.')
+            return self.process(messages, model='gpt-3.5-turbo-0301')
 
-        elif model == "gpt-4":
+        elif model == 'gpt-4':
             self.logger.warning(
-                "Warning: gpt-4 may change over time. Returning num tokens assuming gpt-4-0314.")
-            return self.process(messages, model="gpt-4-0314")
+                'Warning: gpt-4 may change over time. Returning num tokens assuming gpt-4-0314.')
+            return self.process(messages, model='gpt-4-0314')
 
-        elif model == "gpt-3.5-turbo-0301":
+        elif model == 'gpt-3.5-turbo-0301':
             # every message follows <|start|>{role/name}\n{content}<|end|>\n
             tokens_per_message = 4
             tokens_per_name = -1  # if there's a name, the role is omitted
 
-        elif model == "gpt-4-0314":
+        elif model == 'gpt-4-0314':
             tokens_per_message = 3
             tokens_per_name = 1
 

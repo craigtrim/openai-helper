@@ -10,7 +10,7 @@ def test_service():
     counter = InputTokenCounter().process
     assert counter
 
-    print (counter("the quick brown fox jumps over the lazy dog"))
+    print (counter('the quick brown fox jumps over the lazy dog'))
 
 
 def main():

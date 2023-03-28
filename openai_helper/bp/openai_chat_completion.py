@@ -4,6 +4,7 @@
 
 
 from typing import List
+from typing import Optional
 from typing import Callable
 
 from baseblock import EnvIO
@@ -38,7 +39,8 @@ class OpenAIChatCompletion(BaseObject):
 
     def run(self,
             input_prompt: str,
-            messages: List[str]) -> dict:
+            messages: List[str],
+            model: Optional[str] = 'gpt-3.5-turbo') -> dict:
         """ Run an OpenAI event
 
         Args:
@@ -60,6 +62,8 @@ class OpenAIChatCompletion(BaseObject):
                     odd-numbered entries as user questions
                     even-numbered entries as system responses
 
+            model (str): the model to use
+
         Returns:
             dict: an output dictionary with two keys:
                 input: the input dictionary with validated parameters and default values where appropriate
@@ -78,8 +82,9 @@ class OpenAIChatCompletion(BaseObject):
             Enforcer.is_str(input_prompt)
 
         d_result = self._run()(
+            model=model,
+            messages=messages,
             input_prompt=input_prompt,
-            messages=messages
         )
 
         if self.isEnabledForDebug:

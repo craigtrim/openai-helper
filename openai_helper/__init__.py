@@ -42,7 +42,8 @@ def num_of_tokens(messages: List[str] or str,
 
 def chat(input_prompt: str,
          messages: Optional[Union[List[str], str]] = None,
-         remove_emojis: bool = True) -> Optional[str]:
+         remove_emojis: bool = True,
+         model: Optional[str] = 'gpt-3.5-turbo') -> Optional[str]:
     """ Call OpenAI Chat Completion
 
     Args:
@@ -82,6 +83,8 @@ def chat(input_prompt: str,
             Reference:
                 https://github.com/craigtrim/openai-helper/issues/8
 
+        model (str, optional): The model name to use.  Defaults to 'gpt-3.5-turbo'
+
     Returns:
         Optional[str]: the result (if any)
     """
@@ -101,8 +104,10 @@ def chat(input_prompt: str,
         bp = OpenAIChatCompletion()
 
         d_result = bp.run(
+            model=model,
+            messages=messages,
             input_prompt=input_prompt,
-            messages=messages)
+        )
 
         if not d_result or not d_result['output']:
             return None
@@ -125,47 +130,48 @@ def chat(input_prompt: str,
         print(e)
 
 
-def call(input_prompt: str,
-         max_tokens: int = 256,
-         temperature: float = 0.7,
-         remove_emojis: bool = True,
-         engine: str = 'text-davinci-003') -> Optional[str]:
-    """ Call OpenAI Text Completion
+# def call(input_prompt: str,
+#          max_tokens: int = 256,
+#          temperature: float = 0.7,
+#          remove_emojis: bool = True,
+#          engine: str = 'text-davinci-003') -> Optional[str]:
+#     """ Call OpenAI Text Completion
 
-    Args:
-        input_prompt (str): a defined input prompt
-        max_tokens (int, optional): max tokens to use. Defaults to 256.
-        temperature (float, optional): the temperature. Defaults to 0.7.
-        remove_emojis (bool, optional): remove any emojis OpenAI might provide. Defaults to True.
-        engine (str, optional): the LLM engine. Defaults to 'text-davinci-003'.
+#     Args:
+#         input_prompt (str): a defined input prompt
+#         max_tokens (int, optional): max tokens to use. Defaults to 256.
+#         temperature (float, optional): the temperature. Defaults to 0.7.
+#         remove_emojis (bool, optional): remove any emojis OpenAI might provide. Defaults to True.
+#         engine (str, optional): the LLM engine. Defaults to 'text-davinci-003'.
 
-    Returns:
-        Optional[str]: the result (if any)
-    """
+#     Returns:
+#         Optional[str]: the result (if any)
+#     """
 
-    if not EnvIO.exists_as_true('USE_OPENAI'):
-        return None
+#     if not EnvIO.exists_as_true('USE_OPENAI'):
+#         return None
 
-    bp = OpenAITextCompletion()
+#     bp = OpenAITextCompletion()
 
-    d_result = bp.run(
-        input_prompt=input_prompt,
-        engine=engine,
-        temperature=temperature,
-        max_tokens=max_tokens)
+#     d_result = bp.run(
+#         input_prompt=input_prompt,
+#         engine=engine,
+#         temperature=temperature,
+#         max_tokens=max_tokens)
 
-    if not d_result or not d_result['output']:
-        return None
+#     if not d_result or not d_result['output']:
+#         return None
 
-    return OutputExtractorText().process(
-        input_text=input_prompt,
-        d_result=d_result,
-        remove_emojis=remove_emojis)
+#     return OutputExtractorText().process(
+#         input_text=input_prompt,
+#         d_result=d_result,
+#         remove_emojis=remove_emojis)
 
 
 def call2(input_prompt: str,
-          remove_emojis: bool = True,
-          engine: str = 'text-davinci-003') -> Optional[str]:
+          remove_emojis: Optional[bool] = True,
+          engine: Optional[str] = 'text-davinci-003',
+          temperature: Optional[float] = 1.0) -> Optional[str]:
     """ Call OpenAI
 
     Not a very creative function name, but basically 'full-auto' call
@@ -176,29 +182,33 @@ def call2(input_prompt: str,
             Reference:
                 https://github.com/craigtrim/openai-helper/issues/8
         engine (str, optional): the LLM engine. Defaults to 'text-davinci-003'.
+        temperature (float, optional): the temperature. Defaults to 1.0.
 
     Returns:
         Optional[str]: the result (if any)
     """
 
-    max_tokens = len(input_prompt) * 2
-    if max_tokens > 4000:
-        return None
-
     try:
 
-        result = call(
+        bp = OpenAITextCompletion()
+
+        d_result = bp.run(
             input_prompt=input_prompt,
-            max_tokens=max_tokens,
-            temperature=1.0,
             engine=engine,
+            temperature=temperature,
+            max_tokens=4000)
+
+        result = OutputExtractorText().process(
+            input_text=input_prompt,
+            d_result=d_result,
             remove_emojis=remove_emojis)
 
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug('\n'.join([
                 'OpenAI Call Completed',
                 f'\tInput Prompt: {input_prompt}',
-                f'\tMax Tokens: {max_tokens}',
+                f'\tEngine: {engine}',
+                f'\tTemperature: {temperature}',
                 f'\tResult: {result}']))
 
         return result

@@ -9,11 +9,9 @@ from typing import Optional
 
 from pprint import pformat
 
-from baseblock import EnvIO
 from baseblock import Enforcer
 from baseblock import Stopwatch
 from baseblock import BaseObject
-from baseblock import CryptoBase
 
 from openai.error import RateLimitError
 from openai.error import PermissionError
@@ -21,7 +19,6 @@ from openai.error import AuthenticationError
 from openai.error import ServiceUnavailableError
 
 from openai_helper.dmo import ChatMessageFormatter
-from openai_helper.dmo import CompletionEventExtractor
 
 
 class RunChatCompletion(BaseObject):
@@ -35,6 +32,10 @@ class RunChatCompletion(BaseObject):
             1-Mar-2023
             craigtrim@gmail.com
             *   https://github.com/craigtrim/openai-helper/issues/9
+        Updated:
+            28-Mar-2023
+            craigtrim@gmail.com
+            *   pass model name in dynamically
 
         Args:
             conn (object): a connected instance of OpenAI
@@ -45,13 +46,14 @@ class RunChatCompletion(BaseObject):
         self._formatter = ChatMessageFormatter().process
 
     def _process(self,
-                 input_messages: List[str]) -> Optional[dict]:
+                 input_messages: List[str],
+                 model: str) -> Optional[dict]:
 
         def invoke_call() -> Optional[Any]:
             try:
 
                 return self._completion(
-                    model='gpt-3.5-turbo',
+                    model=model,
                     messages=input_messages
                 )
 
@@ -90,7 +92,8 @@ class RunChatCompletion(BaseObject):
 
     def process(self,
                 input_prompt: str,
-                messages: List[str]) -> dict:
+                messages: List[str],
+                model: Optional[str] = 'gpt-3.5-turbo') -> dict:
         """ Run an OpenAI event
 
         Args:
@@ -112,6 +115,8 @@ class RunChatCompletion(BaseObject):
                     odd-numbered entries as user questions
                     even-numbered entries as system responses
 
+            model (str): the model to use
+
         Returns:
             dict: an output dictionary with two keys:
                 input: the input dictionary with validated parameters and default values where appropriate
@@ -129,7 +134,9 @@ class RunChatCompletion(BaseObject):
             input_prompt=input_prompt,
             messages=messages)
 
-        d_result = self._process(input_messages)
+        d_result = self._process(
+            model=model,
+            input_messages=input_messages)
 
         if not d_result:
             self.logger.error('\n'.join([
