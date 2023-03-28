@@ -7,7 +7,7 @@ from pprint import pprint
 
 from baseblock import Enforcer
 
-from openai_helper import call
+from openai_helper import call2
 
 
 def extract_output(input_text: str):
@@ -17,7 +17,7 @@ def extract_output(input_text: str):
 
     Enforcer.is_str(input_text)
 
-    print(call(input_text))
+    print(call2(input_text))
 
     # nothing to really test; this is an observation case
 

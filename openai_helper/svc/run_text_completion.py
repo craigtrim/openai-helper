@@ -73,7 +73,7 @@ class RunTextCompletion(BaseObject):
                     engine=d_event['engine'],
                     prompt=d_event['input_prompt'],
                     temperature=d_event['temperature'],
-                    max_tokens=d_event['max_tokens'],
+                    # max_tokens=d_event['max_tokens'],
                     top_p=d_event['top_p'],
                     best_of=d_event['best_of'],
                     frequency_penalty=d_event['frequency_penalty'],
@@ -164,7 +164,7 @@ class RunTextCompletion(BaseObject):
         sw = Stopwatch()
 
         if not max_tokens:
-            max_tokens = 4000
+            max_tokens = 4096
 
         # if not max_tokens or not type(max_tokens) == int:
         #     max_tokens = len(input_prompt) * 2

@@ -196,7 +196,7 @@ def call2(input_prompt: str,
             input_prompt=input_prompt,
             engine=engine,
             temperature=temperature,
-            max_tokens=4000)
+            max_tokens=4096)
 
         result = OutputExtractorText().process(
             input_text=input_prompt,
