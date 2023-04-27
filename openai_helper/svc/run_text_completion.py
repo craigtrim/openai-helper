@@ -18,6 +18,7 @@ from openai.error import PermissionError
 from openai.error import AuthenticationError
 from openai.error import ServiceUnavailableError
 
+from openai_helper.dmo import InputTokenCounter
 from openai_helper.dmo import CompletionEventExtractor
 
 
@@ -59,6 +60,7 @@ class RunTextCompletion(BaseObject):
         """
         BaseObject.__init__(self, __name__)
         self._completion = conn.Completion.create
+        self._count_tokens = InputTokenCounter().process
         self._extract_event = CompletionEventExtractor().process
         self._timeout = EnvIO.int_or_default(
             'OPENAI_CREATE_TIMEOUT', timeout)  # GRAFFL-380
@@ -73,7 +75,7 @@ class RunTextCompletion(BaseObject):
                     engine=d_event['engine'],
                     prompt=d_event['input_prompt'],
                     temperature=d_event['temperature'],
-                    # max_tokens=d_event['max_tokens'],
+                    max_tokens=d_event['max_tokens'],
                     top_p=d_event['top_p'],
                     best_of=d_event['best_of'],
                     frequency_penalty=d_event['frequency_penalty'],
@@ -163,8 +165,20 @@ class RunTextCompletion(BaseObject):
 
         sw = Stopwatch()
 
+        prompt_tokens = self._count_tokens(
+            messages=[input_prompt],
+            model=engine)
+
         if not max_tokens:
+            max_tokens = prompt_tokens * 3
+        else:
+            max_tokens += prompt_tokens
+
+        if max_tokens > 4096:
             max_tokens = 4096
+
+        # if not max_tokens:
+        #     max_tokens = 4096
 
         # if not max_tokens or not type(max_tokens) == int:
         #     max_tokens = len(input_prompt) * 2

@@ -48,8 +48,8 @@ freeze:
 	poetry run python -m pip install --upgrade pip
 
 all:
-	make linters
 	make build
+	make linters
 	make integration
 	make copy
 	make freeze
