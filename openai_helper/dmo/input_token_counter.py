@@ -10,6 +10,9 @@ from tiktoken import encoding_for_model
 
 from baseblock import BaseObject
 
+GPT35_TURBO_LATEST = 'gpt-3.5-turbo-0301'
+GPT4_LATEST = 'gpt-4-0314'
+
 
 class InputTokenCounter(BaseObject):
     """ Count Tokens accurately with Tiktoken
@@ -33,6 +36,10 @@ class InputTokenCounter(BaseObject):
             27-Mar-2023
             craigtrim@gmail.com
             *   https://github.com/craigtrim/openai-helper/issues/11
+        Updated:
+            3-May-2023
+            craigtrim@gmail.com
+            *   refactor model if/else conditions
         """
         BaseObject.__init__(self, __name__)
 
@@ -78,28 +85,31 @@ class InputTokenCounter(BaseObject):
             messages = [messages]
 
         if not model or not len(model):
-            model = 'gpt-3.5-turbo-0301'
+            model = GPT35_TURBO_LATEST
 
         encoding = self._cached_model(model)
 
-        if model == 'gpt-3.5-turbo':
-            self.logger.warning(
-                'Warning: gpt-3.5-turbo may change over time. Returning num tokens assuming gpt-3.5-turbo-0301.')
-            return self.process(messages, model='gpt-3.5-turbo-0301')
-
-        elif model == 'gpt-4':
-            self.logger.warning(
-                'Warning: gpt-4 may change over time. Returning num tokens assuming gpt-4-0314.')
-            return self.process(messages, model='gpt-4-0314')
-
-        elif model == 'gpt-3.5-turbo-0301':
-            # every message follows <|start|>{role/name}\n{content}<|end|>\n
+        if model == GPT35_TURBO_LATEST:
             tokens_per_message = 4
-            tokens_per_name = -1  # if there's a name, the role is omitted
 
-        elif model == 'gpt-4-0314':
+        elif model == GPT4_LATEST:
             tokens_per_message = 3
-            tokens_per_name = 1
+
+        elif model.startswith('gpt-3.5'):
+            if self.isEnabledForDebug:
+                self.logger.debug('\n'.join([
+                    'Model Assumption',
+                    f'\tSpecified Model: {model}',
+                    f'\tAssumed Model: {GPT35_TURBO_LATEST}']))
+            return self.process(messages=messages, model=GPT35_TURBO_LATEST)
+
+        elif model.startswith('gpt-4'):
+            if self.isEnabledForDebug:
+                self.logger.debug('\n'.join([
+                    'Model Assumption',
+                    f'\tSpecified Model: {model}',
+                    f'\tAssumed Model: {GPT4_LATEST}']))
+            return self.process(messages=messages, model=GPT4_LATEST)
 
         else:
             # raise NotImplementedError(

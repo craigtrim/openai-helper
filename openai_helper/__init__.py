@@ -195,8 +195,7 @@ def call2(input_prompt: str,
         d_result = bp.run(
             input_prompt=input_prompt,
             engine=engine,
-            temperature=temperature,
-            max_tokens=4096)
+            temperature=temperature)
 
         result = OutputExtractorText().process(
             input_text=input_prompt,
