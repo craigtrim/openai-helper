@@ -54,6 +54,7 @@ class InputTokenCounter(BaseObject):
             except KeyError:
                 self.logger.error('\n'.join([
                     'Warning: model not found.',
+                    f'\tModel: {model}',
                     f'\tUsing cl100k_base encoding.']))
                 self.__d_encoding[model] = encoding_for_model(
                     'cl100k_base')

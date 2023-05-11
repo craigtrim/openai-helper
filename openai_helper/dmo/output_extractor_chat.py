@@ -26,11 +26,17 @@ class OutputExtractorChat(BaseObject):
     """ A Generic Service to Extract Unstructured Output from an OpenAI response """
 
     def __init__(self):
-        """
+        """ Change Log
+        
         Created:
             1-Mar-2023
             craigtrim@gmail.com
             *   https://github.com/craigtrim/openai-helper/issues/9
+        Updated:
+            11-May-2023
+            craigtrim@gmail.com
+            *   fix output-cleansing routine
+                https://github.com/craigtrim/openai-helper/issues/12
         """
         BaseObject.__init__(self, __name__)
         self._remove_emojis = EtlRemoveEmojis().process
@@ -181,8 +187,9 @@ class OutputExtractorChat(BaseObject):
             if not output_text or not len(output_text):
                 return None
 
+        # https://github.com/craigtrim/openai-helper/issues/12
         if output_text.startswith('"') and output_text.endswith('"'):
-            output_text = output_text[1:-1]
+            output_text = output_text[1:len(output_text) - 1]
 
         if self.isEnabledForDebug:
             self.logger.debug('\n'.join([

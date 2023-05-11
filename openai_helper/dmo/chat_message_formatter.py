@@ -10,7 +10,12 @@ from baseblock import BaseObject
 
 
 class ChatMessageFormatter(BaseObject):
-    """ Format Chat Message Input """
+    """ Format Chat Message Input
+
+    Notes:
+    -   Roles must be ['system', 'assistant', 'user']
+        custom named roles will throw an exception
+    """
 
     def __init__(self):
         """ Change Log
@@ -32,11 +37,11 @@ class ChatMessageFormatter(BaseObject):
             Enforcer.is_str(input_prompt)
             Enforcer.is_list_of_str(messages)
 
-        if len(messages) % 2 != 1:
-            self.logger.error('\n'.join([
-                'Expect Interaction Sequences in Odd-Numbered Multiples',
-                f'\tActual Messages:\n{messages}']))
-            raise ValueError
+        # if len(messages) % 2 != 1:
+        #     self.logger.error('\n'.join([
+        #         'Expect Interaction Sequences in Odd-Numbered Multiples',
+        #         f'\tActual Messages:\n{messages}']))
+        #     raise ValueError
 
         outputs = [
             {'role': 'system', 'content': input_prompt},

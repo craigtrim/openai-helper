@@ -130,44 +130,6 @@ def chat(input_prompt: str,
         print(e)
 
 
-# def call(input_prompt: str,
-#          max_tokens: int = 256,
-#          temperature: float = 0.7,
-#          remove_emojis: bool = True,
-#          engine: str = 'text-davinci-003') -> Optional[str]:
-#     """ Call OpenAI Text Completion
-
-#     Args:
-#         input_prompt (str): a defined input prompt
-#         max_tokens (int, optional): max tokens to use. Defaults to 256.
-#         temperature (float, optional): the temperature. Defaults to 0.7.
-#         remove_emojis (bool, optional): remove any emojis OpenAI might provide. Defaults to True.
-#         engine (str, optional): the LLM engine. Defaults to 'text-davinci-003'.
-
-#     Returns:
-#         Optional[str]: the result (if any)
-#     """
-
-#     if not EnvIO.exists_as_true('USE_OPENAI'):
-#         return None
-
-#     bp = OpenAITextCompletion()
-
-#     d_result = bp.run(
-#         input_prompt=input_prompt,
-#         engine=engine,
-#         temperature=temperature,
-#         max_tokens=max_tokens)
-
-#     if not d_result or not d_result['output']:
-#         return None
-
-#     return OutputExtractorText().process(
-#         input_text=input_prompt,
-#         d_result=d_result,
-#         remove_emojis=remove_emojis)
-
-
 def call2(input_prompt: str,
           remove_emojis: Optional[bool] = True,
           engine: Optional[str] = 'text-davinci-003',

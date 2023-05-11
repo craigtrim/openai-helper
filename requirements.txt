@@ -4,7 +4,7 @@ async-timeout @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/31
 attrs @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/fc/0f/04/a87ea178df0e763c143a0eedf15ccd1700b5a5d54d17ba0f01d3791748/attrs-23.1.0-py3-none-any.whl
 autopep8 @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/99/fa/8e/112982d07bedbc9f4184629dd998ac5b3cb0a01cdee98ded03128c72bc/autopep8-1.6.0-py2.py3-none-any.whl
 baseblock @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/e9/af/04/d3e8b6bb6a9b4529e2e869e5f32486599ceda62b790d74ba43ce05377e/baseblock-0.2.22-py3-none-any.whl
-certifi @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/17/c7/62/fff2f22fc119ec960e5bf6a5a33f66a167ed2e253f2874f8a7575f3cd9/certifi-2022.12.7-py3-none-any.whl
+certifi @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/90/5f/c1/841125a152473a5330162bad3fa458c053b8b2d1ee5112723ddd6a6783/certifi-2023.5.7-py3-none-any.whl#sha256=c6c2e98f5c7869efca1f8916fed228dd91539f9f1b444c314c06eef02980c716
 cffi @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/7d/26/a2/6695b21ce04407fbecceb61a88eaae991c2069deb1f071d3de97929651/cffi-1.15.1-cp38-cp38-win_amd64.whl
 cfgv @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/07/9a/ee/962c2dab45907e4fd1a13afc30753a15fe678f1dcf2c862a9794ed748b/cfgv-3.3.1-py2.py3-none-any.whl
 charset-normalizer @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/14/22/11/d4d816b2ee83968e7e0449012372171826f0516ab8d46ccf99c4971325/charset_normalizer-3.1.0-cp38-cp38-win_amd64.whl
@@ -38,7 +38,7 @@ pytest @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/2f/e3/f4/
 PyYAML @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/f7/e8/05/c16a713e7ee8d7b7dff0acfe3bfd713a63078d60be83d2ebb0f09288c3/PyYAML-6.0-cp38-cp38-win_amd64.whl
 regex @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/a6/21/87/9f38dd25cd8bac81b70fd06c5a41483f99718d87ab63aa9825f6eeb4bb/regex-2023.5.5-cp38-cp38-win_amd64.whl
 requests @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/65/61/ec/eec982b7d2a9d951f1f1d89f7a36ed33dd39e728eafbac9754b16809f8/requests-2.30.0-py3-none-any.whl
-tiktoken @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/36/87/d3/66dcdf2c5b3a820c79a09dc85eb78750845ab1e0d08195558d5f62f213/tiktoken-0.3.3-cp38-cp38-win_amd64.whl
+tiktoken @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/30/94/ef/03436772d800b1273a0b2f43addb4e20d86ae3b32f50a5d85ee5574540/tiktoken-0.4.0-cp38-cp38-win_amd64.whl#sha256=9c6dd439e878172dc163fced3bc7b19b9ab549c271b257599f55afc3a6a5edef
 toml @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/9f/8c/c3/7b4f6778d60f3c9fa11f8fd0e48243bbad25a04975e0a01006b6350594/toml-0.10.2-py2.py3-none-any.whl
 tomli @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/36/bd/11/98fa2af866c73d00f2498ade62c7fcf28db8656714b7b7a44e9cb2f855/tomli-2.0.1-py3-none-any.whl
 tqdm @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/45/3b/83/11e9b65ddcb85f0eaa322e1d88111befee9da675e5fe1a2b952ea8fc03/tqdm-4.65.0-py3-none-any.whl
