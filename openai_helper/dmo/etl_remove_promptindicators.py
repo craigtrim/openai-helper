@@ -4,10 +4,26 @@
 
 
 from baseblock import BaseObject
+from baseblock import TextMatcher
 
 
 class EtlRemovePromptIndicators(BaseObject):
     """ A Generic Service to Extract Unstructured Output from an OpenAI response """
+
+    __d_replacements = {
+        'User:': '',
+        'Human:': '',
+        'Assistant:': '',
+        'AI:': '',
+        'Marv:': '',
+        'Len:': '',
+        "Marv's": "it's",
+        "I'm an AI language model designed by OpenAI": "I'm a bot",
+        'As an AI language model,': '',
+        'Two-Sentence Horror Story:': '',
+        'designed by OpenAI': '',
+        "I'm an AI language model": "I'm a bot",
+    }
 
     def __init__(self):
         """ Change Log
@@ -21,6 +37,10 @@ class EtlRemovePromptIndicators(BaseObject):
             craigtrim@gmail.com
             *   renamed from 'etl-remove-indicators' in pursuit of
                 https://github.com/craigtrim/openai-helper/issues/2
+        Updated:
+            18-May-2023
+            craigtrim@gmail.com
+            *   move replacements into a dictionary
         """
         BaseObject.__init__(self, __name__)
 
@@ -40,47 +60,18 @@ class EtlRemovePromptIndicators(BaseObject):
             str: the potentially modified output text
         """
 
-        indicators = ['User:', 'Human:', 'Assistant:']
+        for k in self.__d_replacements:
+            if not TextMatcher.exists(
+                    value=k,
+                    input_text=output_text,
+                    case_sensitive=False):
+                continue
 
-        for indicator in indicators:
-            if indicator in output_text:
-                output_text = output_text.split(indicator)[-1].strip()
-
-        if 'User:' in output_text:
-            output_text = output_text.replace('User:', '').strip()
-
-        if 'Human:' in output_text:
-            output_text = output_text.replace('Human:', '').strip()
-
-        if 'Assistant:' in output_text:
-            return output_text.replace('Assistant:', '').strip()
-
-        if 'AI:' in output_text:
-            return output_text.replace('AI:', '').strip()
-
-        if 'Marv:' in output_text:
-            output_text = output_text.replace('Marv:', '').strip()
-
-        if 'Len:' in output_text:
-            output_text = output_text.replace('Len:', '').strip()
-
-        if "Marv's" in output_text:
-            output_text = output_text.replace("Marv's", 'its')
-
-        if "I'm an AI language model designed by OpenAI":
-            output_text = output_text.replace(
-                "I'm an AI language model designed by OpenAI", "I'm a bot")
-
-        if 'designed by OpenAI':
-            output_text = output_text.replace(
-                'designed by OpenAI', '')
-
-        if "I'm an AI language model":
-            output_text = output_text.replace(
-                "I'm an AI language model", "I'm a bot")
-
-        if 'Two-Sentence Horror Story:' in output_text:
-            output_text = output_text.replace(
-                'Two-Sentence Horror Story:', '').strip()
+            output_text = TextMatcher.replace(
+                input_text=output_text,
+                old_value=k,
+                new_value=self.__d_replacements[k],
+                case_sensitive=False,
+                recursive=False)
 
         return output_text

@@ -27,7 +27,7 @@ class OutputExtractorChat(BaseObject):
 
     def __init__(self):
         """ Change Log
-        
+
         Created:
             1-Mar-2023
             craigtrim@gmail.com
