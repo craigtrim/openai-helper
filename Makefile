@@ -34,14 +34,12 @@ integration:
 	poetry run python drivers/output_extractor_text_driver.py
 	poetry run python drivers/output_extractor_text_plac.py "This is a test"
 	poetry run python drivers/openai_connector_driver.py
-#	poetry run python drivers/openai_custom_model_driver.py
 	poetry run python drivers/openai_helper_driver.py
 	poetry run python drivers/run_chat_completion_1_driver.py
 	poetry run python drivers/run_chat_completion_2_driver.py
 
 linters:
 	poetry run pre-commit run --all-files
-#	poetry run flakeheaven lint
 
 freeze:
 	poetry run pip freeze > requirements.txt
